@@ -1,0 +1,26 @@
+name: Check
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: isys
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: isys
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U isys" --health-interval 10s --health-timeout 5s --health-retries 5
+    env:
+      DATABASE_URL: postgresql://isys:test_password@localhost:5432/isys?schema=public
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # TODO: po commitnutí package-lock.json vrátit `npm ci` a `cache: npm`
+      - run: npm install
+      - run: npx prisma db push
+      - run: npm run build
