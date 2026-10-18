@@ -6,9 +6,13 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
   const { next } = await searchParams;
   return (
     <div className="login">
-      <div className="logo">iSYS<span> / TECH</span></div>
-      <h1>Přihlášení</h1>
-      <p className="muted">Účty zakládá správce v Supabase. Registrace není veřejná.</p>
+      <div className="logo">
+        iSYS<span>TECH</span>
+      </div>
+      <div>
+        <h1>Přihlášení</h1>
+        <p className="muted">Účty zakládá správce. Registrace není veřejná.</p>
+      </div>
       <LoginForm next={next} />
     </div>
   );

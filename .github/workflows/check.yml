@@ -25,5 +25,9 @@ jobs:
           node-version: '22'
       # TODO: po commitnutí package-lock.json vrátit `npm ci` a `cache: npm`
       - run: npm install
-      - run: npx prisma db push
-      - run: npm run build
+      - name: Prisma db push
+        run: npx prisma db push 2>&1 | tee /tmp/push.log; test ${PIPESTATUS[0]} -eq 0 || { echo "::error title=prisma db push::$(tail -c 1800 /tmp/push.log | tr '\n' ' ')"; exit 1; }
+        shell: bash
+      - name: Build
+        run: npm run build 2>&1 | tee /tmp/build.log; test ${PIPESTATUS[0]} -eq 0 || { echo "::error title=build::$(grep -v '^\s*$' /tmp/build.log | tail -c 3000 | tr '\n' ' ')"; exit 1; }
+        shell: bash

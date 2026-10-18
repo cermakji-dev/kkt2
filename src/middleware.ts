@@ -23,10 +23,10 @@ export async function middleware(request: NextRequest) {
     },
   );
 
-  // getUser() ověří token u Supabase, nestačí jen přečíst cookie.
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // getClaims() ověří podpis JWT (u asymetrických klíčů lokálně, bez dotazu na
+  // Supabase) a v případě potřeby obnoví session do cookies.
+  const { data } = await supabase.auth.getClaims();
+  const user = data?.claims?.sub ? data.claims : null;
 
   const { pathname } = request.nextUrl;
   const isPublic = PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(p + '/'));
