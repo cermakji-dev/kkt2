@@ -8,6 +8,8 @@ import { assignBuilding, deleteBuilding } from '@/app/actions';
 import { fmtDate } from '@/lib/format';
 import { displayName, getUser } from '@/lib/auth';
 import { activePeople } from '@/lib/people';
+import { StartReport } from '@/components/start-report';
+import { ReportRow, reportInclude } from '@/components/report-list';
 
 export const dynamic = 'force-dynamic';
 
@@ -25,6 +27,7 @@ export default async function BuildingDetail({ params }: { params: Promise<{ id:
       tasks: { orderBy: [{ status: 'asc' }, { dueAt: 'asc' }], include: { assignee: { select: { id: true, name: true, email: true } } } },
       keys: { orderBy: { code: 'asc' } },
       inspections: { orderBy: { inspectedAt: 'desc' } },
+      reports: { include: reportInclude, orderBy: { date: 'desc' }, take: 20 },
     },
     }),
   ]);
@@ -128,6 +131,12 @@ export default async function BuildingDetail({ params }: { params: Promise<{ id:
             {b.keys.length ? b.keys.map((k) => <KeyRow key={k.id} k={k} showBuilding={false} />) : <Empty>Žádné svazky klíčů.</Empty>}
           </Panel>
         </div>
+        <Panel title="Protokoly kontrol" count={b.reports.length}>
+          <StartReport buildings={[]} buildingId={b.id} />
+          {b.reports.map((r) => (
+            <ReportRow key={r.id} r={r} showBuilding={false} />
+          ))}
+        </Panel>
         <Panel
           title="Kontroly a revize"
           count={b.inspections.length}

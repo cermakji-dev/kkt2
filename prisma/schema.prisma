@@ -25,6 +25,7 @@ model Profile {
   technicianBuildings Building[] @relation("BuildingTechnician")
   referentBuildings   Building[] @relation("BuildingReferent")
   tasks               Task[]     @relation("TaskAssignee")
+  reports             InspectionReport[]
 }
 
 model Building {
@@ -42,6 +43,7 @@ model Building {
   tasks        Task[]
   keys         KeySet[]
   inspections  Inspection[]
+  reports      InspectionReport[]
 
   @@index([technicianId])
   @@index([referentId])
@@ -57,10 +59,13 @@ model Task {
   building   Building   @relation(fields: [buildingId], references: [id], onDelete: Restrict)
   assigneeId String?
   assignee   Profile?   @relation("TaskAssignee", fields: [assigneeId], references: [id], onDelete: SetNull)
+  reportId   String?
+  report     InspectionReport? @relation(fields: [reportId], references: [id], onDelete: SetNull)
   createdAt  DateTime   @default(now())
 
   @@index([buildingId])
   @@index([assigneeId])
+  @@index([reportId])
 }
 
 enum TaskStatus {
@@ -91,9 +96,63 @@ model Inspection {
   nextDue     DateTime?
   result      InspectionResult @default(OK)
   notes       String?
+  reportId    String?          @unique
+  report      InspectionReport? @relation(fields: [reportId], references: [id], onDelete: SetNull)
   createdAt   DateTime         @default(now())
 
   @@index([buildingId])
+}
+
+enum ReportStatus {
+  DRAFT
+  FINAL
+}
+
+model InspectionReport {
+  id          String       @id @default(cuid())
+  buildingId  String
+  building    Building     @relation(fields: [buildingId], references: [id], onDelete: Restrict)
+  template    String
+  status      ReportStatus @default(DRAFT)
+  date        DateTime
+  inspectorId String?
+  inspector   Profile?     @relation(fields: [inspectorId], references: [id], onDelete: SetNull)
+  /// { [itemKey]: { s?: 'OK' | 'DEFECT' | 'NA', n?: string, task?: boolean } }
+  items       Json         @default("{}")
+  summary     String?
+  nextDue     DateTime?
+  svjName     String?
+  attachments Attachment[]
+  inspection  Inspection?
+  tasks       Task[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  finalizedAt DateTime?
+
+  @@index([buildingId])
+}
+
+enum AttachmentKind {
+  PHOTO
+  SIGNATURE_TECH
+  SIGNATURE_SVJ
+  SIGNATURE_HOLDER
+  SIGNATURE_ISSUER
+}
+
+model Attachment {
+  id        String            @id @default(cuid())
+  reportId  String?
+  report    InspectionReport? @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  loanId    String?
+  kind      AttachmentKind
+  itemKey   String?
+  mime      String
+  data      Bytes
+  createdAt DateTime          @default(now())
+
+  @@index([reportId])
+  @@index([loanId])
 }
 
 enum InspectionResult {
