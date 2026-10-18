@@ -150,3 +150,86 @@ export function LendForm({ action, id, today }: { action: (s: FormState, fd: For
     </form>
   );
 }
+
+/** Obecný formulář se serverovou akcí, chybou a potvrzením „Uloženo“. */
+export function ActionForm({
+  action,
+  children,
+  submitLabel,
+  className = 'add',
+  successText = 'Uloženo',
+  resetOnSuccess = false,
+}: {
+  action: (s: FormState, fd: FormData) => Promise<FormState>;
+  children: React.ReactNode;
+  submitLabel: string;
+  className?: string;
+  successText?: string;
+  resetOnSuccess?: boolean;
+}) {
+  const [state, formAction] = useActionState(action, {});
+  const formRef = useRef<HTMLFormElement>(null);
+  const [shownOk, setShownOk] = useState<number | undefined>(undefined);
+  useEffect(() => {
+    if (!state.ok) return;
+    if (resetOnSuccess) formRef.current?.reset();
+    setShownOk(state.ok);
+    const t = setTimeout(() => setShownOk(undefined), 2500);
+    return () => clearTimeout(t);
+  }, [state.ok, resetOnSuccess]);
+  return (
+    <form ref={formRef} action={formAction} className={className}>
+      {children}
+      {state.error && (
+        <p className="err" role="alert">
+          {state.error}
+        </p>
+      )}
+      <div className="end">
+        {shownOk && state.ok === shownOk && !state.error && (
+          <span className="okmsg" role="status">
+            ✓ {successText}
+          </span>
+        )}
+        <Submit>{submitLabel}</Submit>
+      </div>
+    </form>
+  );
+}
+
+/** Výběr, který se odešle hned po změně (přiřazení úkolu). */
+export function AutoSelect({
+  action,
+  id,
+  name,
+  value,
+  options,
+  label,
+}: {
+  action: (fd: FormData) => Promise<void>;
+  id: string;
+  name: string;
+  value: string;
+  options: { value: string; label: string }[];
+  label: string;
+}) {
+  const ref = useRef<HTMLFormElement>(null);
+  return (
+    <form action={action} ref={ref} className="inline">
+      <input type="hidden" name="id" value={id} />
+      <select
+        name={name}
+        defaultValue={value}
+        aria-label={label}
+        className="mini"
+        onChange={() => ref.current?.requestSubmit()}
+      >
+        {options.map((o) => (
+          <option key={o.value} value={o.value}>
+            {o.label}
+          </option>
+        ))}
+      </select>
+    </form>
+  );
+}

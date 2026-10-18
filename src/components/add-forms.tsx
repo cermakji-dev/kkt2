@@ -1,4 +1,6 @@
 import type { Building } from '@prisma/client';
+import type { PersonOpt } from './ui';
+import { displayName } from '@/lib/auth';
 import { AddPanel } from './forms';
 import { BuildingSelect } from './ui';
 import { createBuilding, createInspection, createKey, createTask } from '@/app/actions';
@@ -29,7 +31,7 @@ export function AddBuilding() {
   );
 }
 
-export function AddTask({ buildings, buildingId }: { buildings: B; buildingId?: string }) {
+export function AddTask({ buildings, buildingId, people }: { buildings: B; buildingId?: string; people?: PersonOpt[] }) {
   return (
     <AddPanel label="Nový úkol" submitLabel="Přidat úkol" action={createTask} keepOpen>
       <label className="wide">
@@ -41,6 +43,20 @@ export function AddTask({ buildings, buildingId }: { buildings: B; buildingId?: 
         Termín
         <input name="dueAt" type="date" />
       </label>
+      {people && (
+        <label>
+          Řeší
+          <select name="assigneeId" defaultValue="auto">
+            <option value="auto">Technik objektu</option>
+            <option value="">Nepřiřazeno</option>
+            {people.map((p) => (
+              <option key={p.id} value={p.id}>
+                {displayName(p)}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
       <label className="wide">
         Poznámka
         <input name="notes" maxLength={1000} placeholder="Nepovinné" />

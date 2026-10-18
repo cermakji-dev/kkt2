@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import type { Building, Inspection, KeySet, Task } from '@prisma/client';
-import { ActButton, DeleteButton, LendForm } from './forms';
-import { cycleTask, deleteInspection, deleteKey, deleteTask, lendKey, returnKey } from '@/app/actions';
+import type { Building, Inspection, KeySet, Profile, Task } from '@prisma/client';
+import { ActButton, AutoSelect, DeleteButton, LendForm } from './forms';
+import { assignTask, cycleTask, deleteInspection, deleteKey, deleteTask, lendKey, returnKey } from '@/app/actions';
+import { displayName } from '@/lib/auth';
 import { dueTone, fmtDate, isOverdue, startOfToday, TASK_STATUS, toInputDate } from '@/lib/format';
 
 export function Panel({
@@ -47,19 +48,36 @@ function BLink({ b }: { b: Pick<Building, 'id' | 'name'> }) {
   );
 }
 
-export function TaskRow({ t, showBuilding = true }: { t: Task & Partial<Named>; showBuilding?: boolean }) {
+export type PersonOpt = Pick<Profile, 'id' | 'name' | 'email'>;
+
+export function TaskRow({
+  t,
+  showBuilding = true,
+  people,
+}: {
+  t: Task & Partial<Named> & { assignee?: PersonOpt | null };
+  showBuilding?: boolean;
+  people?: PersonOpt[];
+}) {
   const st = TASK_STATUS[t.status];
   const late = isOverdue(t);
+  const assigneeOpts = people
+    ? [{ value: '', label: 'Nepřiřazeno' }, ...people.map((p) => ({ value: p.id, label: displayName(p) }))]
+    : null;
   return (
     <div className="row">
       <div className="main">
         <div className={'t' + (t.status === 'DONE' ? ' done' : '')}>{t.title}</div>
         <div className="s">
           {showBuilding && t.building && <BLink b={t.building} />}
+          {!assigneeOpts && t.assignee !== undefined && <span>{t.assignee ? displayName(t.assignee) : 'Nepřiřazeno'}</span>}
           {t.notes && <span>{t.notes}</span>}
         </div>
       </div>
       <div className="acts">
+        {assigneeOpts && (
+          <AutoSelect action={assignTask} id={t.id} name="assigneeId" value={t.assigneeId ?? ''} options={assigneeOpts} label="Řeší" />
+        )}
         {t.dueAt &&
           (late ? (
             <Pill tone="bad">Po termínu · {fmtDate(t.dueAt)}</Pill>

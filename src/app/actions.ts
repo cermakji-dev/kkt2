@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
-import { requireUser } from '@/lib/auth';
+import { requireAdmin, requireUser } from '@/lib/auth';
 import { NEXT_STATUS } from '@/lib/format';
 
 export type FormState = { error?: string; ok?: number };
@@ -54,7 +54,7 @@ const buildingSchema = z.object({
 });
 
 export async function createBuilding(_: FormState, fd: FormData): Promise<FormState> {
-  await requireUser();
+  await requireAdmin();
   const p = buildingSchema.safeParse(fields(fd));
   if (!p.success) return { error: 'Vyplňte název a adresu objektu.' };
   await prisma.building.create({ data: p.data });
@@ -62,7 +62,7 @@ export async function createBuilding(_: FormState, fd: FormData): Promise<FormSt
 }
 
 export async function deleteBuilding(fd: FormData) {
-  await requireUser();
+  await requireAdmin();
   const bid = id.parse(fd.get('id'));
   try {
     await prisma.building.delete({ where: { id: bid } });
@@ -76,20 +76,53 @@ export async function deleteBuilding(fd: FormData) {
   redirect('/buildings');
 }
 
+const assignSchema = z.object({
+  id,
+  technicianId: z.string().max(64).optional().transform((v) => v || null),
+  referentId: z.string().max(64).optional().transform((v) => v || null),
+});
+
+export async function assignBuilding(_: FormState, fd: FormData): Promise<FormState> {
+  await requireAdmin();
+  const p = assignSchema.safeParse(fields(fd));
+  if (!p.success) return { error: 'Neplatné přiřazení.' };
+  await prisma.building.update({
+    where: { id: p.data.id },
+    data: { technicianId: p.data.technicianId, referentId: p.data.referentId },
+  });
+  return done();
+}
+
 // ---------- Úkoly ----------
 const taskSchema = z.object({
   title: text(200),
   buildingId: id,
   dueAt: optDate,
   notes: optText(1000),
+  assigneeId: z.string().max(64).optional(),
 });
 
 export async function createTask(_: FormState, fd: FormData): Promise<FormState> {
   await requireUser();
   const p = taskSchema.safeParse(fields(fd));
   if (!p.success) return { error: 'Vyplňte úkol a vyberte objekt.' };
-  await prisma.task.create({ data: p.data });
+  const { assigneeId: rawAssignee, ...data } = p.data;
+  // Bez výběru připadne úkol technikovi objektu.
+  let assigneeId: string | null = rawAssignee || null;
+  if (rawAssignee === undefined || rawAssignee === 'auto') {
+    const b = await prisma.building.findUnique({ where: { id: data.buildingId }, select: { technicianId: true } });
+    assigneeId = b?.technicianId ?? null;
+  }
+  await prisma.task.create({ data: { ...data, assigneeId } });
   return done();
+}
+
+export async function assignTask(fd: FormData) {
+  await requireUser();
+  const tid = id.parse(fd.get('id'));
+  const raw = String(fd.get('assigneeId') ?? '');
+  await prisma.task.update({ where: { id: tid }, data: { assigneeId: raw || null } });
+  revalidatePath('/', 'layout');
 }
 
 export async function cycleTask(fd: FormData) {
