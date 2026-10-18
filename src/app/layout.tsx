@@ -1,14 +1,13 @@
 import './globals.css';
 import Link from 'next/link';
 import type { Metadata, Viewport } from 'next';
-import { Archivo, IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 import Nav, { TabBar, type NavItem } from '@/components/nav';
 import { displayName, getUser, initials, ROLE_LABEL } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
-const display = Archivo({ subsets: ['latin', 'latin-ext'], axes: ['wdth'], variable: '--font-display', display: 'swap' });
-const body = IBM_Plex_Sans({ subsets: ['latin', 'latin-ext'], weight: ['400', '500', '600'], variable: '--font-body', display: 'swap' });
-const mono = IBM_Plex_Mono({ subsets: ['latin', 'latin-ext'], weight: ['400', '500'], variable: '--font-mono', display: 'swap' });
+const body = Geist({ subsets: ['latin', 'latin-ext'], variable: '--font-body', display: 'swap' });
+const mono = Geist_Mono({ subsets: ['latin', 'latin-ext'], variable: '--font-mono', display: 'swap' });
 
 export const metadata: Metadata = {
   title: 'iSYS | Správa objektů',
@@ -18,14 +17,14 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   viewportFit: 'cover',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#1e2a25' },
-    { media: '(prefers-color-scheme: dark)', color: '#0c110f' },
+    { media: '(prefers-color-scheme: light)', color: '#09090b' },
+    { media: '(prefers-color-scheme: dark)', color: '#09090b' },
   ],
 };
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const user = await getUser();
-  const fonts = `${display.variable} ${body.variable} ${mono.variable}`;
+  const fonts = `${body.variable} ${mono.variable}`;
 
   if (!user || !user.active) {
     return (
@@ -68,7 +67,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <div className="shell">
           <aside>
             <Link href="/" className="logo">
-              iSYS<span>TECH</span>
+              <span className="mark" aria-hidden="true" />
+              iSYS
             </Link>
             <Nav items={side} />
             <Link href="/profile" className="me">
@@ -81,7 +81,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           </aside>
           <header className="topbar">
             <Link href="/" className="logo">
-              iSYS<span>TECH</span>
+              <span className="mark" aria-hidden="true" />
+              iSYS
             </Link>
             <div className="top-act">
               {user.role === 'ADMIN' && (

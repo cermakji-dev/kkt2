@@ -12,7 +12,7 @@ export const C = {
   muted: rgb(0.36, 0.41, 0.38),
   line: rgb(0.81, 0.84, 0.82),
   sunk: rgb(0.93, 0.94, 0.93),
-  accent: rgb(0.83, 0.34, 0.11),
+  accent: rgb(0.42, 0.36, 0.93),
   ok: rgb(0.18, 0.48, 0.31),
   okSoft: rgb(0.86, 0.94, 0.89),
   bad: rgb(0.71, 0.15, 0.17),

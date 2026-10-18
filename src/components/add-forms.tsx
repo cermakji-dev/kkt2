@@ -76,6 +76,10 @@ export function AddKey({ buildings, buildingId }: { buildings: B; buildingId?: s
         Popis
         <input name="description" maxLength={200} placeholder="Vchod, sklep, kotelna…" />
       </label>
+      <label>
+        Počet kusů
+        <input name="count" type="number" min={1} max={99} defaultValue={1} inputMode="numeric" />
+      </label>
       <BuildingSelect buildings={buildings} value={buildingId} />
     </AddPanel>
   );

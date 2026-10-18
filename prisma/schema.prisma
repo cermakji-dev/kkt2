@@ -26,6 +26,8 @@ model Profile {
   referentBuildings   Building[] @relation("BuildingReferent")
   tasks               Task[]     @relation("TaskAssignee")
   reports             InspectionReport[]
+  loansIssued         KeyLoan[]  @relation("LoanIssuer")
+  loansReceived       KeyLoan[]  @relation("LoanReceiver")
 }
 
 model Building {
@@ -78,13 +80,39 @@ model KeySet {
   id          String    @id @default(cuid())
   code        String    @unique
   description String?
+  count       Int?
+  /// Aktuální držitel (kopie z aktivní výpůjčky kvůli rychlým přehledům)
   holder      String?
   borrowedAt  DateTime?
   buildingId  String
   building    Building  @relation(fields: [buildingId], references: [id], onDelete: Restrict)
+  loans       KeyLoan[]
   createdAt   DateTime  @default(now())
 
   @@index([buildingId])
+}
+
+model KeyLoan {
+  id             String       @id @default(cuid())
+  keySetId       String
+  keySet         KeySet       @relation(fields: [keySetId], references: [id], onDelete: Cascade)
+  holder         String
+  holderPhone    String?
+  holderCompany  String?
+  purpose        String?
+  borrowedAt     DateTime
+  expectedReturn DateTime?
+  returnedAt     DateTime?
+  issuedById     String?
+  issuedBy       Profile?     @relation("LoanIssuer", fields: [issuedById], references: [id], onDelete: SetNull)
+  returnedToId   String?
+  returnedTo     Profile?     @relation("LoanReceiver", fields: [returnedToId], references: [id], onDelete: SetNull)
+  note           String?
+  attachments    Attachment[]
+  createdAt      DateTime     @default(now())
+
+  @@index([keySetId])
+  @@index([returnedAt])
 }
 
 model Inspection {
@@ -145,6 +173,7 @@ model Attachment {
   reportId  String?
   report    InspectionReport? @relation(fields: [reportId], references: [id], onDelete: Cascade)
   loanId    String?
+  loan      KeyLoan?          @relation(fields: [loanId], references: [id], onDelete: Cascade)
   kind      AttachmentKind
   itemKey   String?
   mime      String

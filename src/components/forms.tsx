@@ -122,35 +122,6 @@ function PendingButton({ className, title, children }: { className: string; titl
   );
 }
 
-/** Zapůjčení klíčů: tlačítko rozbalí malý formulář. */
-export function LendForm({ action, id, today }: { action: (s: FormState, fd: FormData) => Promise<FormState>; id: string; today: string }) {
-  const [open, setOpen] = useState(false);
-  const [state, formAction] = useActionState(action, {});
-  useEffect(() => {
-    if (state.ok) setOpen(false);
-  }, [state.ok]);
-  if (!open)
-    return (
-      <button type="button" className="btn sm" onClick={() => setOpen(true)}>
-        Zapůjčit
-      </button>
-    );
-  return (
-    <form action={formAction} className="lend">
-      <input type="hidden" name="id" value={id} />
-      <input name="holder" required maxLength={80} placeholder="Komu" aria-label="Komu" autoFocus />
-      <input name="date" type="date" defaultValue={today} required aria-label="Datum" />
-      <Submit className="btn sm pri" pending="…">
-        Zapsat
-      </Submit>
-      <button type="button" className="btn sm ghost" onClick={() => setOpen(false)}>
-        Zrušit
-      </button>
-      {state.error && <span className="err">{state.error}</span>}
-    </form>
-  );
-}
-
 /** Obecný formulář se serverovou akcí, chybou a potvrzením „Uloženo“. */
 export function ActionForm({
   action,

@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import type { Building, Inspection, KeySet, Profile, Task } from '@prisma/client';
-import { ActButton, AutoSelect, DeleteButton, LendForm } from './forms';
-import { assignTask, cycleTask, deleteInspection, deleteKey, deleteTask, lendKey, returnKey } from '@/app/actions';
+import { ActButton, AutoSelect, DeleteButton } from './forms';
+import { assignTask, cycleTask, deleteInspection, deleteKey, deleteTask } from '@/app/actions';
+import { returnKey } from '@/app/keys/actions';
 import { displayName } from '@/lib/auth';
-import { dueTone, fmtDate, isOverdue, startOfToday, TASK_STATUS, toInputDate } from '@/lib/format';
+import { daysUntil, dueTone, fmtDate, isOverdue, TASK_STATUS } from '@/lib/format';
 
 export function Panel({
   title,
@@ -93,32 +94,43 @@ export function TaskRow({
   );
 }
 
-export function KeyRow({ k, showBuilding = true }: { k: KeySet & Partial<Named>; showBuilding?: boolean }) {
+export function KeyRow({
+  k,
+  showBuilding = true,
+  loan,
+}: {
+  k: KeySet & Partial<Named>;
+  showBuilding?: boolean;
+  loan?: { expectedReturn: Date | null; purpose: string | null } | null;
+}) {
   const out = !!k.holder;
+  const late = loan?.expectedReturn ? daysUntil(loan.expectedReturn) < 0 : false;
+  const days = k.borrowedAt ? -daysUntil(k.borrowedAt) : 0;
   return (
-    <div className="row">
-      <div className="main">
+    <div className={'row' + (late ? ' late' : '')}>
+      <Link href={`/keys/${k.id}`} className="main rowlink">
         <div className="t">
           <span className="code">{k.code}</span>
           {k.description}
         </div>
         <div className="s">
-          {showBuilding && k.building && <BLink b={k.building} />}
+          {showBuilding && k.building && <span>{k.building.name}</span>}
           <span>
             {out ? (
               <>
-                u <b>{k.holder}</b> od {fmtDate(k.borrowedAt)}
+                u <b>{k.holder}</b> {days === 0 ? 'od dneška' : `${days} d`}
+                {loan?.purpose && ` · ${loan.purpose}`}
               </>
             ) : (
               'v kanceláři'
             )}
           </span>
         </div>
-      </div>
+      </Link>
       <div className="acts">
         {out ? (
           <>
-            <Pill tone="warn">Zapůjčeno</Pill>
+            {late ? <Pill tone="bad">Po termínu</Pill> : <Pill tone="warn">Venku</Pill>}
             <ActButton action={returnKey} id={k.id} className="btn sm">
               Vrátit
             </ActButton>
@@ -126,10 +138,12 @@ export function KeyRow({ k, showBuilding = true }: { k: KeySet & Partial<Named>;
         ) : (
           <>
             <Pill tone="ok">K dispozici</Pill>
-            <LendForm action={lendKey} id={k.id} today={toInputDate(startOfToday())} />
+            <Link href={`/keys/${k.id}/lend`} className="btn sm">
+              Zapůjčit
+            </Link>
           </>
         )}
-        <DeleteButton action={deleteKey} id={k.id} />
+        {!out && <DeleteButton action={deleteKey} id={k.id} />}
       </div>
     </div>
   );

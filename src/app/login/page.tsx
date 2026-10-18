@@ -7,7 +7,8 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
   return (
     <div className="login">
       <div className="logo">
-        iSYS<span>TECH</span>
+        <span className="mark" aria-hidden="true" />
+        iSYS
       </div>
       <div>
         <h1>Přihlášení</h1>

@@ -144,6 +144,11 @@ const keySchema = z.object({
   code: text(40),
   description: optText(200),
   buildingId: id,
+  count: z
+    .string()
+    .optional()
+    .transform((v) => (v ? Number.parseInt(v, 10) : null))
+    .pipe(z.number().int().min(1).max(99).nullable()),
 });
 
 export async function createKey(_: FormState, fd: FormData): Promise<FormState> {
@@ -159,22 +164,6 @@ export async function createKey(_: FormState, fd: FormData): Promise<FormState> 
     throw e;
   }
   return done();
-}
-
-const lendSchema = z.object({ id, holder: text(80), date: reqDate });
-
-export async function lendKey(_: FormState, fd: FormData): Promise<FormState> {
-  await requireUser();
-  const p = lendSchema.safeParse(fields(fd));
-  if (!p.success) return { error: 'Vyplňte, komu klíče půjčujete.' };
-  await prisma.keySet.update({ where: { id: p.data.id }, data: { holder: p.data.holder, borrowedAt: p.data.date } });
-  return done();
-}
-
-export async function returnKey(fd: FormData) {
-  await requireUser();
-  await prisma.keySet.update({ where: { id: id.parse(fd.get('id')) }, data: { holder: null, borrowedAt: null } });
-  revalidatePath('/', 'layout');
 }
 
 export async function deleteKey(fd: FormData) {
