@@ -1,5 +1,7 @@
 name: Check
 on: [push, pull_request]
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -37,3 +39,23 @@ jobs:
             exit 1
           }
         shell: bash
+      - name: Testovací data
+        run: npx tsx e2e/seed.ts
+      - name: Prohlížeč pro testy
+        run: npx playwright install --with-deps chromium
+      - name: Testy v prohlížeči
+        id: e2e
+        run: npx playwright test
+        continue-on-error: true
+      - name: Screenshoty do větve e2e-shots
+        if: always() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          [ -d e2e-shots ] || exit 0
+          cd e2e-shots
+          git init -q && git checkout -q -b e2e-shots
+          git add -A
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -qm "Screenshoty ${GITHUB_SHA::7}"
+          git push -qf "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" e2e-shots
+      - name: Výsledek testů
+        if: steps.e2e.outcome == 'failure'
+        run: exit 1

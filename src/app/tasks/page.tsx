@@ -7,6 +7,7 @@ import { TaskPanel } from '@/components/task-panel';
 import { Board, QuickAdd } from '@/components/task-client';
 import { quickAdd } from './actions';
 import { BUCKETS, bucketOf, dueLabel, PRIORITY, sortTasks, type Bucket } from '@/lib/tasks';
+import { startOfToday } from '@/lib/format';
 
 export const dynamic = 'force-dynamic';
 
@@ -40,11 +41,12 @@ export default async function Tasks({
   const base = q({});
   const taskHref = (id: string) => q({ t: id });
 
-  const notDone: Prisma.TaskWhereInput = { status: { not: 'DONE' } };
+  // Dnes dokončené zůstanou v seznamu přeškrtnuté (jako v Asaně).
+  const notDone: Prisma.TaskWhereInput = { OR: [{ status: { not: 'DONE' } }, { completedAt: { gte: startOfToday() } }] };
   let scoped: Prisma.TaskWhereInput;
   if (scope === 'mine') scoped = view === 'board' ? { assigneeId: me.id } : { assigneeId: me.id, ...notDone };
   else if (scope === 'team') scoped = view === 'board' ? {} : notDone;
-  else if (scope === 'unassigned') scoped = { assigneeId: null, ...notDone };
+  else if (scope === 'unassigned') scoped = { assigneeId: null, status: { not: 'DONE' } };
   else scoped = { status: 'DONE' };
   const where: Prisma.TaskWhereInput = { parentId: null, ...(buildingId ? { buildingId } : {}), ...scoped };
 

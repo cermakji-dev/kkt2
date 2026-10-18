@@ -1,9 +1,11 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
+import { e2eUserId } from '@/lib/e2e';
 
 const PUBLIC_PATHS = ['/login'];
 
 export async function middleware(request: NextRequest) {
+  if (e2eUserId()) return NextResponse.next({ request });
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(

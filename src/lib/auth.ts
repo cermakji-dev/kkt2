@@ -2,6 +2,7 @@ import { cache } from 'react';
 import type { Profile, Role } from '@prisma/client';
 import { createClient } from '@/lib/supabase/server';
 import { prisma } from '@/lib/prisma';
+import { e2eUserId } from '@/lib/e2e';
 
 export type CurrentUser = Profile;
 
@@ -12,6 +13,8 @@ export type CurrentUser = Profile;
  * cache() = jedno volání na request.
  */
 export const getUser = cache(async (): Promise<CurrentUser | null> => {
+  const e2e = e2eUserId();
+  if (e2e) return prisma.profile.findUnique({ where: { id: e2e } });
   const supabase = await createClient();
   const { data, error } = await supabase.auth.getClaims();
   const sub = data?.claims?.sub;
