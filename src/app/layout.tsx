@@ -59,7 +59,13 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     { href: '/keys', label: 'Klíče', icon: 'key', count: lent },
     { href: '/inspections', label: 'Kontroly', icon: 'clipboard' },
   ];
-  const side: NavItem[] = [...main, ...(user.role === 'ADMIN' ? [{ href: '/users', label: 'Uživatelé', icon: 'users' } as NavItem] : [])];
+  const pendingLeaves = user.role === 'ADMIN' ? await prisma.leaveRequest.count({ where: { status: 'PENDING' } }) : 0;
+  const side: NavItem[] = [
+    ...main,
+    { href: '/attendance', label: 'Docházka', icon: 'clock' },
+    { href: '/leave', label: 'Dovolená', icon: 'sun', count: pendingLeaves },
+    ...(user.role === 'ADMIN' ? [{ href: '/users', label: 'Uživatelé', icon: 'users' } as NavItem] : []),
+  ];
 
   return (
     <html lang="cs" className={fonts}>
@@ -85,6 +91,17 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
               iSYS
             </Link>
             <div className="top-act">
+              <Link href="/attendance" className="top-ic" aria-label="Docházka">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
+                  <path d="M12 7v5l3 2M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z" />
+                </svg>
+              </Link>
+              <Link href="/leave" className="top-ic" aria-label="Dovolená">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
+                  <path d="M12 3v2M12 19v2M5 12H3M21 12h-2M6.3 6.3L4.9 4.9M19.1 19.1l-1.4-1.4M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
+                </svg>
+                {pendingLeaves > 0 && <span className="top-dot" />}
+              </Link>
               {user.role === 'ADMIN' && (
                 <Link href="/users" className="top-ic" aria-label="Uživatelé">
                   <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">

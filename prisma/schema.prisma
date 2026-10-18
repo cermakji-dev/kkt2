@@ -21,6 +21,9 @@ model Profile {
   phone               String?
   role                Role       @default(TECHNIK)
   active              Boolean    @default(true)
+  /// Roční nárok na dovolenou (dny) a sick days
+  vacationDays        Int        @default(20)
+  sickDays            Int        @default(3)
   createdAt           DateTime   @default(now())
   technicianBuildings Building[] @relation("BuildingTechnician")
   referentBuildings   Building[] @relation("BuildingReferent")
@@ -28,6 +31,10 @@ model Profile {
   reports             InspectionReport[]
   loansIssued         KeyLoan[]  @relation("LoanIssuer")
   loansReceived       KeyLoan[]  @relation("LoanReceiver")
+  attendance          AttendanceEvent[] @relation("AttendanceOwner")
+  attendanceCreated   AttendanceEvent[] @relation("AttendanceCreator")
+  leaves              LeaveRequest[]    @relation("LeaveOwner")
+  leavesApproved      LeaveRequest[]    @relation("LeaveApprover")
 }
 
 model Building {
@@ -187,4 +194,58 @@ model Attachment {
 enum InspectionResult {
   OK
   DEFECT
+}
+
+enum AttendanceKind {
+  PRICHOD
+  ODCHOD
+  SLUZEBNI_CESTA
+  LEKAR
+  HOME_OFFICE
+}
+
+model AttendanceEvent {
+  id          String         @id @default(cuid())
+  profileId   String
+  profile     Profile        @relation("AttendanceOwner", fields: [profileId], references: [id], onDelete: Cascade)
+  kind        AttendanceKind
+  at          DateTime
+  note        String?
+  createdById String?
+  createdBy   Profile?       @relation("AttendanceCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  createdAt   DateTime       @default(now())
+
+  @@index([profileId, at])
+}
+
+enum LeaveType {
+  DOVOLENA
+  SICK_DAY
+}
+
+enum LeaveStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+model LeaveRequest {
+  id           String      @id @default(cuid())
+  profileId    String
+  profile      Profile     @relation("LeaveOwner", fields: [profileId], references: [id], onDelete: Cascade)
+  type         LeaveType   @default(DOVOLENA)
+  from         DateTime
+  to           DateTime
+  days         Float
+  status       LeaveStatus @default(PENDING)
+  note         String?
+  approverId   String?
+  approver     Profile?    @relation("LeaveApprover", fields: [approverId], references: [id], onDelete: SetNull)
+  decidedAt    DateTime?
+  decisionNote String?
+  createdAt    DateTime    @default(now())
+
+  @@index([profileId])
+  @@index([status])
 }
