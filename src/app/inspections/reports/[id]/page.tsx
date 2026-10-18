@@ -6,7 +6,8 @@ import { getTemplate, itemKey, reportStats, type ItemsMap } from '@/lib/template
 import { fmtDate, toInputDate } from '@/lib/format';
 import ReportEditor from '@/components/report-editor';
 import { DeleteButton } from '@/components/forms';
-import { Pill, TaskRow } from '@/components/ui';
+import { Pill } from '@/components/ui';
+import { TaskItem, taskItemInclude } from '@/components/task-item';
 import { deleteReport } from '../actions';
 
 export const dynamic = 'force-dynamic';
@@ -22,7 +23,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
       building: { select: { id: true, name: true, address: true } },
       inspector: { select: { id: true, name: true, email: true } },
       attachments: { select: { id: true, kind: true, itemKey: true }, orderBy: { createdAt: 'asc' } },
-      tasks: { include: { assignee: { select: { id: true, name: true, email: true } } } },
+      tasks: { include: taskItemInclude },
     },
   });
   if (!r) notFound();
@@ -94,7 +95,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
               </header>
               <div className="rows">
                 {r.tasks.map((x) => (
-                  <TaskRow key={x.id} t={x} showBuilding={false} />
+                  <TaskItem key={x.id} t={x} href={`/tasks?s=team&t=${x.id}`} showBuilding={false} showStatus />
                 ))}
               </div>
             </section>

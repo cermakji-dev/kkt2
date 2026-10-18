@@ -96,7 +96,7 @@ export async function assignBuilding(_: FormState, fd: FormData): Promise<FormSt
 // ---------- Úkoly ----------
 const taskSchema = z.object({
   title: text(200),
-  buildingId: id,
+  buildingId: z.string().max(64).optional().transform((v) => v || null),
   dueAt: optDate,
   notes: optText(1000),
   assigneeId: z.string().max(64).optional(),
@@ -108,8 +108,8 @@ export async function createTask(_: FormState, fd: FormData): Promise<FormState>
   if (!p.success) return { error: 'Vyplňte úkol a vyberte objekt.' };
   const { assigneeId: rawAssignee, ...data } = p.data;
   // Bez výběru připadne úkol technikovi objektu.
-  let assigneeId: string | null = rawAssignee || null;
-  if (rawAssignee === undefined || rawAssignee === 'auto') {
+  let assigneeId: string | null = rawAssignee && rawAssignee !== 'auto' ? rawAssignee : null;
+  if ((rawAssignee === undefined || rawAssignee === 'auto') && data.buildingId) {
     const b = await prisma.building.findUnique({ where: { id: data.buildingId }, select: { technicianId: true } });
     assigneeId = b?.technicianId ?? null;
   }

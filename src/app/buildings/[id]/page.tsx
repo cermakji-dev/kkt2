@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
-import { Empty, InspectionRow, KeyRow, Panel, TaskRow } from '@/components/ui';
+import { Empty, InspectionRow, KeyRow, Panel } from '@/components/ui';
+import { TaskItem, taskItemInclude } from '@/components/task-item';
 import { AddInspection, AddKey, AddTask } from '@/components/add-forms';
 import { ActionForm, DeleteButton } from '@/components/forms';
 import { assignBuilding, deleteBuilding } from '@/app/actions';
@@ -24,7 +25,7 @@ export default async function BuildingDetail({ params }: { params: Promise<{ id:
     include: {
       technician: person,
       referent: person,
-      tasks: { orderBy: [{ status: 'asc' }, { dueAt: 'asc' }], include: { assignee: { select: { id: true, name: true, email: true } } } },
+      tasks: { where: { parentId: null }, orderBy: [{ status: 'asc' }, { dueAt: 'asc' }], include: taskItemInclude },
       keys: { orderBy: { code: 'asc' } },
       inspections: { orderBy: { inspectedAt: 'desc' } },
       reports: { include: reportInclude, orderBy: { date: 'desc' }, take: 20 },
@@ -122,7 +123,7 @@ export default async function BuildingDetail({ params }: { params: Promise<{ id:
         <div className="grid2">
           <Panel title="Úkoly" count={b.tasks.length} action={<AddTask buildings={[]} buildingId={b.id} people={people} />}>
             {b.tasks.length ? (
-              b.tasks.map((t) => <TaskRow key={t.id} t={t} showBuilding={false} people={people} />)
+              b.tasks.map((t) => <TaskItem key={t.id} t={t} href={`/tasks?b=${b.id}&s=team&t=${t.id}`} showBuilding={false} showStatus />)
             ) : (
               <Empty>Žádné úkoly.</Empty>
             )}

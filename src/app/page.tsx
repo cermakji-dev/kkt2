@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import { getUser } from '@/lib/auth';
-import { Empty, InspectionRow, KeyRow, Panel, TaskRow } from '@/components/ui';
+import { Empty, InspectionRow, KeyRow, Panel } from '@/components/ui';
+import { TaskItem, taskItemInclude } from '@/components/task-item';
 import { daysUntil, isOverdue, latestPerType, longToday } from '@/lib/format';
 
 export const dynamic = 'force-dynamic';
@@ -22,8 +23,8 @@ export default async function Home() {
 
   const [buildings, myTasks, unassigned, keys, inspections] = await Promise.all([
     prisma.building.count(),
-    prisma.task.findMany({ where: { status: { not: 'DONE' }, assigneeId: me.id }, include: { building: bsel } }),
-    prisma.task.count({ where: { status: { not: 'DONE' }, assigneeId: null } }),
+    prisma.task.findMany({ where: { status: { not: 'DONE' }, assigneeId: me.id, parentId: null }, include: taskItemInclude }),
+    prisma.task.count({ where: { status: { not: 'DONE' }, assigneeId: null, parentId: null } }),
     prisma.keySet.findMany({ where: { holder: { not: null } }, include: { building: bsel } }),
     prisma.inspection.findMany({ where: scope, include: { building: bsel } }),
   ]);
@@ -79,9 +80,9 @@ export default async function Home() {
       <div className="grid2">
         <Panel title="Moje úkoly" count={myTasks.length} action={<Link href="/tasks" className="more">Všechny →</Link>}>
           {upcoming.length ? (
-            upcoming.map((t) => <TaskRow key={t.id} t={t} />)
+            upcoming.map((t) => <TaskItem key={t.id} t={t} href={`/tasks?t=${t.id}`} />)
           ) : (
-            <Empty>Žádné otevřené úkoly. {unassigned > 0 && <Link href="/tasks?f=unassigned">Převzít nepřiřazené →</Link>}</Empty>
+            <Empty>Žádné otevřené úkoly. {unassigned > 0 && <Link href="/tasks?s=unassigned">Převzít nepřiřazené →</Link>}</Empty>
           )}
         </Panel>
         <div className="stack">
