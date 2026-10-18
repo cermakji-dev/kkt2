@@ -807,3 +807,4 @@ form.infoform .w2 { grid-column: span 2; }
   .keystate-act .btn, .keystate-act form, .keystate-act form .btn { flex: 1; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+.x-who .avatar { width: 22px; height: 22px; min-height: 0; flex: none; }
