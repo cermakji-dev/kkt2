@@ -16,7 +16,9 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "@prisma/client": "^6.16.0",
-    "zod": "^4.1.0"
+    "zod": "^4.1.0",
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.57.0"
   },
   "devDependencies": {
     "typescript": "^5.9.0",

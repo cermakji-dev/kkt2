@@ -30,7 +30,20 @@ npm run dev
 Na Windows PowerShell místo `cp` použijte `Copy-Item .env.example .env`.
 Otevřete http://localhost:3000.
 
-**Bezpečnost:** Toto je pouze lokální vývojová verze. NEMÁ přihlašování ani kontrolu oprávnění. Nenasazujte veřejně a nevkládejte reálné osobní údaje, klíčové identifikátory ani dokumenty družstva. Heslo v docker-compose je jen pro lokální vývoj. Před produkčním provozem doplnit autentizaci, role, audit, zálohy, HTTPS, ochranu dat a bezpečné ukládání tajných údajů.
+**Bezpečnost:** Aplikace vyžaduje přihlášení (Supabase Auth, e-mail + heslo). Všechny stránky i API jsou za přihlášením (`src/middleware.ts`). Role a audit zatím chybí: každý přihlášený uživatel může všechno.
+
+### Uživatelé
+
+Veřejná registrace není. Účty zakládá správce:
+
+1. Supabase → projekt **kkt2** → **Authentication → Sign In / Providers** → vypnout **Allow new users to sign up**. (Důležité: jinak by se kdokoli mohl zaregistrovat přímo přes Supabase API.)
+2. **Authentication → Users → Add user → Create new user**, zadat e-mail a heslo, zaškrtnout *Auto Confirm User*.
+
+## Nasazení na Vercel
+
+1. https://vercel.com/new → **Import** repozitáře `cermakji-dev/kkt2` (framework Next.js se pozná sám).
+2. V **Environment Variables** vyplnit čtyři proměnné z `.env` (`DATABASE_URL`, `DIRECT_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`).
+3. **Deploy**. Každý další push do `main` se nasadí automaticky.
 
 ## GitHub
 
@@ -54,10 +67,11 @@ Soubor `.env` je ignorovaný Gitem. V CI běží build nad testovací databází
 - Evidence objektů: seznam a vytvoření objektu
 - Datový model: objekty, úkoly, svazky klíčů, kontroly
 - Základ API a validace vstupů
+- Přihlašování přes Supabase Auth, databáze v Supabase
 - Docker PostgreSQL a GitHub Actions
 
 ## Další etapy
-1. Microsoft Entra ID / jiné SSO, role a oprávnění, auditní záznamy.
+1. Role a oprávnění, auditní záznamy, případně SSO (Microsoft Entra ID).
 2. Detail objektu a dokumentace.
 3. Roční kontroly s fotografiemi a PDF.
 4. Evidence výpůjček klíčů a QR/NFC workflow.
