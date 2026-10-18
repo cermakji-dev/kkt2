@@ -1,0 +1,1582 @@
+{
+ "buildings": {
+  "bd-lipova14": {
+   "code": "204",
+   "ico": "27155412",
+   "svjName": "Společenství vlastníků Lipová 14",
+   "cadastralArea": "Vinohrady",
+   "yearBuilt": 1912,
+   "floors": 6,
+   "entrances": 2,
+   "nonResidential": 1,
+   "garages": 0,
+   "hasElevator": false,
+   "hasGas": true,
+   "hasBoiler": true,
+   "hasChimney": true,
+   "hasHydrants": true,
+   "heating": "Domovní plynová kotelna"
+  },
+  "bd-vysluni3": {
+   "code": "117",
+   "ico": "28401233",
+   "svjName": "Společenství vlastníků Na Výsluní 3",
+   "cadastralArea": "Nusle",
+   "yearBuilt": 1968,
+   "floors": 8,
+   "entrances": 1,
+   "nonResidential": 0,
+   "garages": 0,
+   "hasElevator": true,
+   "hasGas": false,
+   "hasBoiler": false,
+   "hasChimney": false,
+   "hasHydrants": true,
+   "heating": "CZT – výměníková stanice"
+  },
+  "bd-korunni88": {
+   "code": "213",
+   "ico": "26677881",
+   "svjName": "Společenství vlastníků Korunní 88",
+   "cadastralArea": "Vinohrady",
+   "yearBuilt": 1908,
+   "floors": 5,
+   "entrances": 1,
+   "nonResidential": 2,
+   "garages": 0,
+   "hasElevator": false,
+   "hasGas": true,
+   "hasBoiler": false,
+   "hasChimney": true,
+   "hasHydrants": false,
+   "heating": "Etážové plynové kotle"
+  },
+  "bd-sumavska7": {
+   "code": "239",
+   "ico": "29012457",
+   "svjName": "Společenství vlastníků Šumavská 7",
+   "cadastralArea": "Vinohrady",
+   "yearBuilt": 1931,
+   "floors": 7,
+   "entrances": 1,
+   "nonResidential": 1,
+   "garages": 0,
+   "hasElevator": true,
+   "hasGas": true,
+   "hasBoiler": true,
+   "hasChimney": true,
+   "hasHydrants": true,
+   "heating": "Střešní plynová kotelna"
+  },
+  "bd-zelena21": {
+   "code": "301",
+   "ico": "27788990",
+   "svjName": "Společenství vlastníků Zelená 21",
+   "cadastralArea": "Dejvice",
+   "yearBuilt": 1936,
+   "floors": 4,
+   "entrances": 1,
+   "nonResidential": 0,
+   "garages": 2,
+   "hasElevator": false,
+   "hasGas": true,
+   "hasBoiler": false,
+   "hasChimney": true,
+   "hasHydrants": false,
+   "heating": "Etážové plynové kotle"
+  },
+  "bd-krejcirova5": {
+   "code": "348",
+   "ico": "00034550",
+   "svjName": "Bytové družstvo Krejčírova 5",
+   "cadastralArea": "Černý Most",
+   "yearBuilt": 1984,
+   "floors": 12,
+   "entrances": 4,
+   "nonResidential": 1,
+   "garages": 0,
+   "hasElevator": true,
+   "hasGas": false,
+   "hasBoiler": false,
+   "hasChimney": false,
+   "hasHydrants": true,
+   "heating": "CZT"
+  },
+  "bd-palmovka2": {
+   "code": "372",
+   "ico": "24215643",
+   "svjName": "Společenství vlastníků U Palmovky 2",
+   "cadastralArea": "Libeň",
+   "yearBuilt": 2006,
+   "floors": 7,
+   "entrances": 2,
+   "nonResidential": 3,
+   "garages": 28,
+   "hasElevator": true,
+   "hasGas": false,
+   "hasBoiler": true,
+   "hasChimney": false,
+   "hasHydrants": true,
+   "heating": "Domovní kotelna, tepelné čerpadlo"
+  },
+  "bd-vlasska11": {
+   "code": "015",
+   "ico": "26701234",
+   "svjName": "Společenství vlastníků Vlašská 11",
+   "cadastralArea": "Malá Strana",
+   "yearBuilt": 1780,
+   "floors": 4,
+   "entrances": 1,
+   "nonResidential": 1,
+   "garages": 0,
+   "hasElevator": false,
+   "hasGas": true,
+   "hasBoiler": false,
+   "hasChimney": true,
+   "hasHydrants": false,
+   "heating": "Etážové plynové kotle"
+  }
+ },
+ "contacts": [
+  {
+   "id": "ct-lipova14-0",
+   "buildingId": "bd-lipova14",
+   "role": "PREDSEDA",
+   "name": "Josef Horák",
+   "phone": "+420 755 350 328",
+   "email": "josef.horak@ukazka.cz",
+   "unitLabel": "byt 5"
+  },
+  {
+   "id": "ct-lipova14-1",
+   "buildingId": "bd-lipova14",
+   "role": "MISTOPREDSEDA",
+   "name": "Jana Sedláčková",
+   "phone": "+420 731 704 532",
+   "email": "jana.sedlackova@ukazka.cz",
+   "unitLabel": "byt 2"
+  },
+  {
+   "id": "ct-lipova14-2",
+   "buildingId": "bd-lipova14",
+   "role": "CLEN_VYBORU",
+   "name": "Jan Černý",
+   "phone": "+420 747 338 617",
+   "email": "jan.cerny@ukazka.cz",
+   "unitLabel": "byt 20"
+  },
+  {
+   "id": "ct-vysluni3-0",
+   "buildingId": "bd-vysluni3",
+   "role": "PREDSEDA",
+   "name": "Jan Sedláček",
+   "phone": "+420 745 833 765",
+   "email": "jan.sedlacek@ukazka.cz",
+   "unitLabel": "byt 18"
+  },
+  {
+   "id": "ct-vysluni3-1",
+   "buildingId": "bd-vysluni3",
+   "role": "MISTOPREDSEDA",
+   "name": "Kateřina Němcová",
+   "phone": "+420 777 703 384",
+   "email": "katerina.nemcova@ukazka.cz",
+   "unitLabel": "byt 1"
+  },
+  {
+   "id": "ct-vysluni3-2",
+   "buildingId": "bd-vysluni3",
+   "role": "CLEN_VYBORU",
+   "name": "Eva Králová",
+   "phone": "+420 763 384 259",
+   "email": "eva.kralova@ukazka.cz",
+   "unitLabel": "byt 7"
+  },
+  {
+   "id": "ct-korunni88-0",
+   "buildingId": "bd-korunni88",
+   "role": "PREDSEDA",
+   "name": "Jiří Procházka",
+   "phone": "+420 731 489 199",
+   "email": "jiri.prochazka@ukazka.cz",
+   "unitLabel": "byt 12"
+  },
+  {
+   "id": "ct-korunni88-1",
+   "buildingId": "bd-korunni88",
+   "role": "MISTOPREDSEDA",
+   "name": "Alena Pokorná",
+   "phone": "+420 725 847 570",
+   "email": "alena.pokorna@ukazka.cz",
+   "unitLabel": "byt 18"
+  },
+  {
+   "id": "ct-korunni88-2",
+   "buildingId": "bd-korunni88",
+   "role": "CLEN_VYBORU",
+   "name": "Jana Jelínková",
+   "phone": "+420 730 665 400",
+   "email": "jana.jelinkova@ukazka.cz",
+   "unitLabel": "byt 20"
+  },
+  {
+   "id": "ct-sumavska7-0",
+   "buildingId": "bd-sumavska7",
+   "role": "PREDSEDA",
+   "name": "Alena Horáková",
+   "phone": "+420 728 146 777",
+   "email": "alena.horakova@ukazka.cz",
+   "unitLabel": "byt 8"
+  },
+  {
+   "id": "ct-sumavska7-1",
+   "buildingId": "bd-sumavska7",
+   "role": "MISTOPREDSEDA",
+   "name": "Hana Černá",
+   "phone": "+420 749 987 203",
+   "email": "hana.cerna@ukazka.cz",
+   "unitLabel": "byt 13"
+  },
+  {
+   "id": "ct-sumavska7-2",
+   "buildingId": "bd-sumavska7",
+   "role": "CLEN_VYBORU",
+   "name": "Martin Růžička",
+   "phone": "+420 766 266 479",
+   "email": "martin.ruzicka@ukazka.cz",
+   "unitLabel": "byt 12"
+  },
+  {
+   "id": "ct-zelena21-0",
+   "buildingId": "bd-zelena21",
+   "role": "PREDSEDA",
+   "name": "Tomáš Pokorný",
+   "phone": "+420 729 723 750",
+   "email": "tomas.pokorny@ukazka.cz",
+   "unitLabel": "byt 6"
+  },
+  {
+   "id": "ct-zelena21-1",
+   "buildingId": "bd-zelena21",
+   "role": "MISTOPREDSEDA",
+   "name": "Zuzana Němcová",
+   "phone": "+420 740 573 488",
+   "email": "zuzana.nemcova@ukazka.cz",
+   "unitLabel": "byt 9"
+  },
+  {
+   "id": "ct-zelena21-2",
+   "buildingId": "bd-zelena21",
+   "role": "CLEN_VYBORU",
+   "name": "Zuzana Němcová",
+   "phone": "+420 761 963 886",
+   "email": "zuzana.nemcova@ukazka.cz",
+   "unitLabel": "byt 2"
+  },
+  {
+   "id": "ct-krejcirova5-0",
+   "buildingId": "bd-krejcirova5",
+   "role": "PREDSEDA",
+   "name": "Lenka Dvořáková",
+   "phone": "+420 760 510 374",
+   "email": "lenka.dvorakova@ukazka.cz",
+   "unitLabel": "byt 3"
+  },
+  {
+   "id": "ct-krejcirova5-1",
+   "buildingId": "bd-krejcirova5",
+   "role": "CLEN_VYBORU",
+   "name": "Tomáš Pospíšil",
+   "phone": "+420 747 771 611",
+   "email": "tomas.pospisil@ukazka.cz",
+   "unitLabel": "byt 13"
+  },
+  {
+   "id": "ct-krejcirova5-2",
+   "buildingId": "bd-krejcirova5",
+   "role": "CLEN_VYBORU",
+   "name": "Ondřej Kučera",
+   "phone": "+420 753 242 352",
+   "email": "ondrej.kucera@ukazka.cz",
+   "unitLabel": "byt 18"
+  },
+  {
+   "id": "ct-krejcirova5-3",
+   "buildingId": "bd-krejcirova5",
+   "role": "DOMOVNIK",
+   "name": "Zuzana Pokorná",
+   "phone": "+420 794 538 697",
+   "email": null,
+   "unitLabel": "byt 13"
+  },
+  {
+   "id": "ct-palmovka2-0",
+   "buildingId": "bd-palmovka2",
+   "role": "PREDSEDA",
+   "name": "Alena Němcová",
+   "phone": "+420 737 621 605",
+   "email": "alena.nemcova@ukazka.cz",
+   "unitLabel": "byt 3"
+  },
+  {
+   "id": "ct-palmovka2-1",
+   "buildingId": "bd-palmovka2",
+   "role": "MISTOPREDSEDA",
+   "name": "Petr Procházka",
+   "phone": "+420 739 742 263",
+   "email": "petr.prochazka@ukazka.cz",
+   "unitLabel": "byt 14"
+  },
+  {
+   "id": "ct-palmovka2-2",
+   "buildingId": "bd-palmovka2",
+   "role": "CLEN_VYBORU",
+   "name": "Ivana Černá",
+   "phone": "+420 769 490 710",
+   "email": "ivana.cerna@ukazka.cz",
+   "unitLabel": "byt 15"
+  },
+  {
+   "id": "ct-vlasska11-0",
+   "buildingId": "bd-vlasska11",
+   "role": "PREDSEDA",
+   "name": "Michal Pokorný",
+   "phone": "+420 790 981 111",
+   "email": "michal.pokorny@ukazka.cz",
+   "unitLabel": "byt 4"
+  },
+  {
+   "id": "ct-vlasska11-1",
+   "buildingId": "bd-vlasska11",
+   "role": "MISTOPREDSEDA",
+   "name": "Zuzana Pokorná",
+   "phone": "+420 763 214 400",
+   "email": "zuzana.pokorna@ukazka.cz",
+   "unitLabel": "byt 14"
+  },
+  {
+   "id": "ct-vlasska11-2",
+   "buildingId": "bd-vlasska11",
+   "role": "CLEN_VYBORU",
+   "name": "Eva Růžičková",
+   "phone": "+420 720 839 996",
+   "email": "eva.ruzickova@ukazka.cz",
+   "unitLabel": "byt 9"
+  }
+ ],
+ "units": [
+  {
+   "id": "u-lipova14-1",
+   "buildingId": "bd-lipova14",
+   "label": "A/1",
+   "type": "BYT",
+   "floor": 1,
+   "area": 94.4,
+   "entrance": "A",
+   "ownerName": "Eva Fialová",
+   "ownerPhone": null
+  },
+  {
+   "id": "u-lipova14-2",
+   "buildingId": "bd-lipova14",
+   "label": "B/2",
+   "type": "BYT",
+   "floor": 1,
+   "area": 72.7,
+   "entrance": "B",
+   "ownerName": "Věra Nováková",
+   "ownerPhone": "+420 766 999 951"
+  },
+  {
+   "id": "u-lipova14-3",
+   "buildingId": "bd-lipova14",
+   "label": "A/3",
+   "type": "BYT",
+   "floor": 1,
+   "area": 45.4,
+   "entrance": "A",
+   "ownerName": "Věra Sedláčková",
+   "ownerPhone": "+420 787 993 721"
+  },
+  {
+   "id": "u-lipova14-4",
+   "buildingId": "bd-lipova14",
+   "label": "B/4",
+   "type": "BYT",
+   "floor": 1,
+   "area": 52.4,
+   "entrance": "B",
+   "ownerName": "Marie Pospíšilová",
+   "ownerPhone": "+420 790 335 702"
+  },
+  {
+   "id": "u-lipova14-5",
+   "buildingId": "bd-lipova14",
+   "label": "A/5",
+   "type": "BYT",
+   "floor": 2,
+   "area": 76.8,
+   "entrance": "A",
+   "ownerName": "Tomáš Sedláček",
+   "ownerPhone": "+420 793 690 584"
+  },
+  {
+   "id": "u-lipova14-6",
+   "buildingId": "bd-lipova14",
+   "label": "B/6",
+   "type": "BYT",
+   "floor": 2,
+   "area": 88.1,
+   "entrance": "B",
+   "ownerName": "Petr Procházka",
+   "ownerPhone": "+420 763 919 982"
+  },
+  {
+   "id": "u-lipova14-7",
+   "buildingId": "bd-lipova14",
+   "label": "A/7",
+   "type": "BYT",
+   "floor": 2,
+   "area": 42.4,
+   "entrance": "A",
+   "ownerName": "Zuzana Procházková",
+   "ownerPhone": "+420 789 956 115"
+  },
+  {
+   "id": "u-lipova14-8",
+   "buildingId": "bd-lipova14",
+   "label": "B/8",
+   "type": "BYT",
+   "floor": 2,
+   "area": 38.1,
+   "entrance": "B",
+   "ownerName": "Lukáš Pokorný",
+   "ownerPhone": null
+  },
+  {
+   "id": "u-lipova14-9",
+   "buildingId": "bd-lipova14",
+   "label": "A/9",
+   "type": "BYT",
+   "floor": 3,
+   "area": 69.4,
+   "entrance": "A",
+   "ownerName": "Jiří Dvořák",
+   "ownerPhone": "+420 781 614 973"
+  },
+  {
+   "id": "u-lipova14-10",
+   "buildingId": "bd-lipova14",
+   "label": "B/10",
+   "type": "BYT",
+   "floor": 3,
+   "area": 89.6,
+   "entrance": "B",
+   "ownerName": "Lenka Dvořáková",
+   "ownerPhone": "+420 773 773 697"
+  },
+  {
+   "id": "u-lipova14-11",
+   "buildingId": "bd-lipova14",
+   "label": "A/11",
+   "type": "BYT",
+   "floor": 3,
+   "area": 91.9,
+   "entrance": "A",
+   "ownerName": "Marie Nováková",
+   "ownerPhone": "+420 792 202 175"
+  },
+  {
+   "id": "u-lipova14-12",
+   "buildingId": "bd-lipova14",
+   "label": "B/12",
+   "type": "BYT",
+   "floor": 3,
+   "area": 69.2,
+   "entrance": "B",
+   "ownerName": "Michal Pokorný",
+   "ownerPhone": "+420 764 170 350"
+  },
+  {
+   "id": "u-lipova14-13",
+   "buildingId": "bd-lipova14",
+   "label": "A/13",
+   "type": "BYT",
+   "floor": 4,
+   "area": 59.4,
+   "entrance": "A",
+   "ownerName": "Eva Růžičková",
+   "ownerPhone": null
+  },
+  {
+   "id": "u-lipova14-14",
+   "buildingId": "bd-lipova14",
+   "label": "B/14",
+   "type": "BYT",
+   "floor": 4,
+   "area": 78.8,
+   "entrance": "B",
+   "ownerName": "Ivana Fialová",
+   "ownerPhone": "+420 790 406 779"
+  },
+  {
+   "id": "u-lipova14-15",
+   "buildingId": "bd-lipova14",
+   "label": "A/15",
+   "type": "BYT",
+   "floor": 4,
+   "area": 44.0,
+   "entrance": "A",
+   "ownerName": "Pavel Pokorný",
+   "ownerPhone": "+420 733 860 666"
+  },
+  {
+   "id": "u-lipova14-16",
+   "buildingId": "bd-lipova14",
+   "label": "B/16",
+   "type": "BYT",
+   "floor": 4,
+   "area": 47.0,
+   "entrance": "B",
+   "ownerName": "Hana Horáková",
+   "ownerPhone": null
+  },
+  {
+   "id": "u-lipova14-17",
+   "buildingId": "bd-lipova14",
+   "label": "A/17",
+   "type": "BYT",
+   "floor": 5,
+   "area": 49.8,
+   "entrance": "A",
+   "ownerName": "Martin Fiala",
+   "ownerPhone": "+420 726 194 749"
+  },
+  {
+   "id": "u-lipova14-18",
+   "buildingId": "bd-lipova14",
+   "label": "B/18",
+   "type": "BYT",
+   "floor": 5,
+   "area": 62.6,
+   "entrance": "B",
+   "ownerName": "Martin Dvořák",
+   "ownerPhone": "+420 736 752 368"
+  },
+  {
+   "id": "u-lipova14-19",
+   "buildingId": "bd-lipova14",
+   "label": "A/19",
+   "type": "BYT",
+   "floor": 5,
+   "area": 47.4,
+   "entrance": "A",
+   "ownerName": "Ondřej Sedláček",
+   "ownerPhone": null
+  },
+  {
+   "id": "u-lipova14-20",
+   "buildingId": "bd-lipova14",
+   "label": "B/20",
+   "type": "BYT",
+   "floor": 5,
+   "area": 70.5,
+   "entrance": "B",
+   "ownerName": "Jana Černá",
+   "ownerPhone": null
+  },
+  {
+   "id": "u-lipova14-21",
+   "buildingId": "bd-lipova14",
+   "label": "A/21",
+   "type": "BYT",
+   "floor": 6,
+   "area": 78.1,
+   "entrance": "A",
+   "ownerName": "Pavel Sedláček",
+   "ownerPhone": "+420 767 696 665"
+  },
+  {
+   "id": "u-lipova14-22",
+   "buildingId": "bd-lipova14",
+   "label": "B/22",
+   "type": "BYT",
+   "floor": 6,
+   "area": 46.6,
+   "entrance": "B",
+   "ownerName": "Pavel Dvořák",
+   "ownerPhone": "+420 725 466 315"
+  },
+  {
+   "id": "u-lipova14-23",
+   "buildingId": "bd-lipova14",
+   "label": "A/23",
+   "type": "BYT",
+   "floor": 6,
+   "area": 77.6,
+   "entrance": "A",
+   "ownerName": "Jana Hájková",
+   "ownerPhone": null
+  },
+  {
+   "id": "u-lipova14-24",
+   "buildingId": "bd-lipova14",
+   "label": "B/24",
+   "type": "BYT",
+   "floor": 6,
+   "area": 89.3,
+   "entrance": "B",
+   "ownerName": "Kateřina Kučerová",
+   "ownerPhone": null
+  },
+  {
+   "id": "u-korunni88-1",
+   "buildingId": "bd-korunni88",
+   "label": "1",
+   "type": "BYT",
+   "floor": 1,
+   "area": 51.7,
+   "entrance": null,
+   "ownerName": "Eva Veselá",
+   "ownerPhone": null
+  },
+  {
+   "id": "u-korunni88-2",
+   "buildingId": "bd-korunni88",
+   "label": "2",
+   "type": "BYT",
+   "floor": 1,
+   "area": 39.4,
+   "entrance": null,
+   "ownerName": "Jiří Král",
+   "ownerPhone": null
+  },
+  {
+   "id": "u-korunni88-3",
+   "buildingId": "bd-korunni88",
+   "label": "3",
+   "type": "BYT",
+   "floor": 2,
+   "area": 88.1,
+   "entrance": null,
+   "ownerName": "Lenka Pokorná",
+   "ownerPhone": "+420 733 491 993"
+  },
+  {
+   "id": "u-korunni88-4",
+   "buildingId": "bd-korunni88",
+   "label": "4",
+   "type": "BYT",
+   "floor": 2,
+   "area": 40.2,
+   "entrance": null,
+   "ownerName": "Věra Němcová",
+   "ownerPhone": "+420 778 458 412"
+  },
+  {
+   "id": "u-korunni88-5",
+   "buildingId": "bd-korunni88",
+   "label": "5",
+   "type": "BYT",
+   "floor": 3,
+   "area": 85.6,
+   "entrance": null,
+   "ownerName": "Lenka Němcová",
+   "ownerPhone": "+420 744 508 436"
+  },
+  {
+   "id": "u-korunni88-6",
+   "buildingId": "bd-korunni88",
+   "label": "6",
+   "type": "BYT",
+   "floor": 3,
+   "area": 54.2,
+   "entrance": null,
+   "ownerName": "Marie Pokorná",
+   "ownerPhone": "+420 785 509 795"
+  },
+  {
+   "id": "u-korunni88-7",
+   "buildingId": "bd-korunni88",
+   "label": "7",
+   "type": "BYT",
+   "floor": 4,
+   "area": 94.9,
+   "entrance": null,
+   "ownerName": "Zuzana Pospíšilová",
+   "ownerPhone": null
+  },
+  {
+   "id": "u-korunni88-8",
+   "buildingId": "bd-korunni88",
+   "label": "8",
+   "type": "BYT",
+   "floor": 4,
+   "area": 44.7,
+   "entrance": null,
+   "ownerName": "Martin Veselý",
+   "ownerPhone": "+420 753 139 211"
+  },
+  {
+   "id": "u-korunni88-9",
+   "buildingId": "bd-korunni88",
+   "label": "9",
+   "type": "BYT",
+   "floor": 5,
+   "area": 72.6,
+   "entrance": null,
+   "ownerName": "Alena Pospíšilová",
+   "ownerPhone": "+420 785 218 494"
+  },
+  {
+   "id": "u-korunni88-10",
+   "buildingId": "bd-korunni88",
+   "label": "10",
+   "type": "BYT",
+   "floor": 5,
+   "area": 90.2,
+   "entrance": null,
+   "ownerName": "Tomáš Pokorný",
+   "ownerPhone": "+420 775 101 632"
+  },
+  {
+   "id": "u-korunni88-11",
+   "buildingId": "bd-korunni88",
+   "label": "11",
+   "type": "BYT",
+   "floor": 6,
+   "area": 91.7,
+   "entrance": null,
+   "ownerName": "Zuzana Horáková",
+   "ownerPhone": "+420 728 780 438"
+  },
+  {
+   "id": "u-korunni88-12",
+   "buildingId": "bd-korunni88",
+   "label": "12",
+   "type": "BYT",
+   "floor": 6,
+   "area": 74.1,
+   "entrance": null,
+   "ownerName": "Jana Marková",
+   "ownerPhone": "+420 772 434 512"
+  },
+  {
+   "id": "u-korunni88-13",
+   "buildingId": "bd-korunni88",
+   "label": "13",
+   "type": "BYT",
+   "floor": 7,
+   "area": 78.4,
+   "entrance": null,
+   "ownerName": "Zuzana Kučerová",
+   "ownerPhone": "+420 768 793 866"
+  },
+  {
+   "id": "u-korunni88-14",
+   "buildingId": "bd-korunni88",
+   "label": "14",
+   "type": "BYT",
+   "floor": 7,
+   "area": 90.4,
+   "entrance": null,
+   "ownerName": "Ivana Marková",
+   "ownerPhone": "+420 720 411 393"
+  },
+  {
+   "id": "u-korunni88-15",
+   "buildingId": "bd-korunni88",
+   "label": "15",
+   "type": "BYT",
+   "floor": 8,
+   "area": 50.2,
+   "entrance": null,
+   "ownerName": "David Pospíšil",
+   "ownerPhone": "+420 776 791 318"
+  },
+  {
+   "id": "u-korunni88-16",
+   "buildingId": "bd-korunni88",
+   "label": "16",
+   "type": "BYT",
+   "floor": 8,
+   "area": 67.6,
+   "entrance": null,
+   "ownerName": "Eva Černá",
+   "ownerPhone": "+420 799 443 195"
+  },
+  {
+   "id": "u-korunni88-17",
+   "buildingId": "bd-korunni88",
+   "label": "17",
+   "type": "BYT",
+   "floor": 9,
+   "area": 85.5,
+   "entrance": null,
+   "ownerName": "Lenka Marková",
+   "ownerPhone": "+420 745 250 125"
+  },
+  {
+   "id": "u-korunni88-18",
+   "buildingId": "bd-korunni88",
+   "label": "18",
+   "type": "BYT",
+   "floor": 9,
+   "area": 40.7,
+   "entrance": null,
+   "ownerName": "Věra Černá",
+   "ownerPhone": "+420 793 299 835"
+  }
+ ],
+ "meters": [
+  {
+   "id": "m-lipova14-1-SV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-1",
+   "kind": "SV",
+   "serial": "S91734598",
+   "location": "koupelna",
+   "verifiedUntil": "2032-04-15"
+  },
+  {
+   "id": "m-lipova14-1-TUV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-1",
+   "kind": "TUV",
+   "serial": "T82394227",
+   "location": "kuchyň",
+   "verifiedUntil": "2028-09-15"
+  },
+  {
+   "id": "m-lipova14-2-SV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-2",
+   "kind": "SV",
+   "serial": "S86149359",
+   "location": "koupelna",
+   "verifiedUntil": "2029-02-15"
+  },
+  {
+   "id": "m-lipova14-2-TUV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-2",
+   "kind": "TUV",
+   "serial": "T19289546",
+   "location": "kuchyň",
+   "verifiedUntil": "2030-09-15"
+  },
+  {
+   "id": "m-lipova14-3-SV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-3",
+   "kind": "SV",
+   "serial": "S36998038",
+   "location": "koupelna",
+   "verifiedUntil": "2026-05-15"
+  },
+  {
+   "id": "m-lipova14-3-TUV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-3",
+   "kind": "TUV",
+   "serial": "T68800797",
+   "location": "kuchyň",
+   "verifiedUntil": "2023-09-15"
+  },
+  {
+   "id": "m-lipova14-4-SV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-4",
+   "kind": "SV",
+   "serial": "S40728046",
+   "location": "koupelna",
+   "verifiedUntil": "2028-02-15"
+  },
+  {
+   "id": "m-lipova14-4-TUV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-4",
+   "kind": "TUV",
+   "serial": "T19510312",
+   "location": "kuchyň",
+   "verifiedUntil": "2029-09-15"
+  },
+  {
+   "id": "m-lipova14-5-SV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-5",
+   "kind": "SV",
+   "serial": "S35556386",
+   "location": "koupelna",
+   "verifiedUntil": "2031-02-15"
+  },
+  {
+   "id": "m-lipova14-5-TUV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-5",
+   "kind": "TUV",
+   "serial": "T57553014",
+   "location": "kuchyň",
+   "verifiedUntil": "2030-07-15"
+  },
+  {
+   "id": "m-lipova14-6-SV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-6",
+   "kind": "SV",
+   "serial": "S70211891",
+   "location": "koupelna",
+   "verifiedUntil": "2032-03-15"
+  },
+  {
+   "id": "m-lipova14-6-TUV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-6",
+   "kind": "TUV",
+   "serial": "T72092888",
+   "location": "kuchyň",
+   "verifiedUntil": "2029-04-15"
+  },
+  {
+   "id": "m-lipova14-7-SV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-7",
+   "kind": "SV",
+   "serial": "S32321899",
+   "location": "koupelna",
+   "verifiedUntil": "2029-07-15"
+  },
+  {
+   "id": "m-lipova14-7-TUV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-7",
+   "kind": "TUV",
+   "serial": "T63826716",
+   "location": "kuchyň",
+   "verifiedUntil": "2028-01-15"
+  },
+  {
+   "id": "m-lipova14-8-SV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-8",
+   "kind": "SV",
+   "serial": "S98834863",
+   "location": "koupelna",
+   "verifiedUntil": "2032-08-15"
+  },
+  {
+   "id": "m-lipova14-8-TUV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-8",
+   "kind": "TUV",
+   "serial": "T39219319",
+   "location": "kuchyň",
+   "verifiedUntil": "2029-01-15"
+  },
+  {
+   "id": "m-lipova14-9-SV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-9",
+   "kind": "SV",
+   "serial": "S20752378",
+   "location": "koupelna",
+   "verifiedUntil": "2032-03-15"
+  },
+  {
+   "id": "m-lipova14-9-TUV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-9",
+   "kind": "TUV",
+   "serial": "T41568532",
+   "location": "kuchyň",
+   "verifiedUntil": "2027-07-15"
+  },
+  {
+   "id": "m-lipova14-10-SV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-10",
+   "kind": "SV",
+   "serial": "S37415205",
+   "location": "koupelna",
+   "verifiedUntil": "2030-06-15"
+  },
+  {
+   "id": "m-lipova14-10-TUV",
+   "buildingId": "bd-lipova14",
+   "unitId": "u-lipova14-10",
+   "kind": "TUV",
+   "serial": "T27566185",
+   "location": "kuchyň",
+   "verifiedUntil": "2030-05-15"
+  },
+  {
+   "id": "m-lipova14-pata",
+   "buildingId": "bd-lipova14",
+   "unitId": null,
+   "kind": "SV",
+   "serial": "P20419877",
+   "location": "patní vodoměr, sklep",
+   "verifiedUntil": "2027-03-31"
+  },
+  {
+   "id": "m-lipova14-teplo",
+   "buildingId": "bd-lipova14",
+   "unitId": null,
+   "kind": "TEPLO",
+   "serial": "K7781204",
+   "location": "kotelna",
+   "verifiedUntil": "2026-08-31"
+  }
+ ],
+ "readings": [
+  {
+   "meterId": "m-lipova14-1-SV",
+   "date": "2025-12-31",
+   "value": 271.514
+  },
+  {
+   "meterId": "m-lipova14-1-SV",
+   "date": "2026-06-30",
+   "value": 291.099
+  },
+  {
+   "meterId": "m-lipova14-1-TUV",
+   "date": "2025-12-31",
+   "value": 62.829
+  },
+  {
+   "meterId": "m-lipova14-1-TUV",
+   "date": "2026-06-30",
+   "value": 86.443
+  },
+  {
+   "meterId": "m-lipova14-2-SV",
+   "date": "2025-12-31",
+   "value": 257.49
+  },
+  {
+   "meterId": "m-lipova14-2-SV",
+   "date": "2026-06-30",
+   "value": 275.06
+  },
+  {
+   "meterId": "m-lipova14-2-TUV",
+   "date": "2025-12-31",
+   "value": 56.34
+  },
+  {
+   "meterId": "m-lipova14-2-TUV",
+   "date": "2026-06-30",
+   "value": 77.359
+  },
+  {
+   "meterId": "m-lipova14-3-SV",
+   "date": "2025-12-31",
+   "value": 173.09
+  },
+  {
+   "meterId": "m-lipova14-3-SV",
+   "date": "2026-06-30",
+   "value": 200.06
+  },
+  {
+   "meterId": "m-lipova14-3-TUV",
+   "date": "2025-12-31",
+   "value": 53.298
+  },
+  {
+   "meterId": "m-lipova14-3-TUV",
+   "date": "2026-06-30",
+   "value": 68.973
+  },
+  {
+   "meterId": "m-lipova14-4-SV",
+   "date": "2025-12-31",
+   "value": 128.448
+  },
+  {
+   "meterId": "m-lipova14-4-SV",
+   "date": "2026-06-30",
+   "value": 170.61
+  },
+  {
+   "meterId": "m-lipova14-4-TUV",
+   "date": "2025-12-31",
+   "value": 37.809
+  },
+  {
+   "meterId": "m-lipova14-4-TUV",
+   "date": "2026-06-30",
+   "value": 49.855
+  },
+  {
+   "meterId": "m-lipova14-5-SV",
+   "date": "2025-12-31",
+   "value": 133.459
+  },
+  {
+   "meterId": "m-lipova14-5-SV",
+   "date": "2026-06-30",
+   "value": 151.367
+  },
+  {
+   "meterId": "m-lipova14-5-TUV",
+   "date": "2025-12-31",
+   "value": 82.027
+  },
+  {
+   "meterId": "m-lipova14-5-TUV",
+   "date": "2026-06-30",
+   "value": 97.016
+  },
+  {
+   "meterId": "m-lipova14-6-SV",
+   "date": "2025-12-31",
+   "value": 104.039
+  },
+  {
+   "meterId": "m-lipova14-6-SV",
+   "date": "2026-06-30",
+   "value": 131.696
+  },
+  {
+   "meterId": "m-lipova14-6-TUV",
+   "date": "2025-12-31",
+   "value": 51.075
+  },
+  {
+   "meterId": "m-lipova14-6-TUV",
+   "date": "2026-06-30",
+   "value": 73.941
+  },
+  {
+   "meterId": "m-lipova14-7-SV",
+   "date": "2025-12-31",
+   "value": 293.179
+  },
+  {
+   "meterId": "m-lipova14-7-SV",
+   "date": "2026-06-30",
+   "value": 322.748
+  },
+  {
+   "meterId": "m-lipova14-7-TUV",
+   "date": "2025-12-31",
+   "value": 131.9
+  },
+  {
+   "meterId": "m-lipova14-7-TUV",
+   "date": "2026-06-30",
+   "value": 142.699
+  },
+  {
+   "meterId": "m-lipova14-8-SV",
+   "date": "2025-12-31",
+   "value": 252.728
+  },
+  {
+   "meterId": "m-lipova14-8-SV",
+   "date": "2026-06-30",
+   "value": 272.372
+  },
+  {
+   "meterId": "m-lipova14-8-TUV",
+   "date": "2025-12-31",
+   "value": 61.377
+  },
+  {
+   "meterId": "m-lipova14-8-TUV",
+   "date": "2026-06-30",
+   "value": 79.223
+  },
+  {
+   "meterId": "m-lipova14-9-SV",
+   "date": "2025-12-31",
+   "value": 196.848
+  },
+  {
+   "meterId": "m-lipova14-9-SV",
+   "date": "2026-06-30",
+   "value": 213.903
+  },
+  {
+   "meterId": "m-lipova14-9-TUV",
+   "date": "2025-12-31",
+   "value": 36.257
+  },
+  {
+   "meterId": "m-lipova14-9-TUV",
+   "date": "2026-06-30",
+   "value": 46.295
+  },
+  {
+   "meterId": "m-lipova14-10-SV",
+   "date": "2025-12-31",
+   "value": 204.35
+  },
+  {
+   "meterId": "m-lipova14-10-SV",
+   "date": "2026-06-30",
+   "value": 226.511
+  },
+  {
+   "meterId": "m-lipova14-10-TUV",
+   "date": "2025-12-31",
+   "value": 64.801
+  },
+  {
+   "meterId": "m-lipova14-10-TUV",
+   "date": "2026-06-30",
+   "value": 80.574
+  },
+  {
+   "meterId": "m-lipova14-pata",
+   "date": "2025-12-31",
+   "value": 4812.4
+  },
+  {
+   "meterId": "m-lipova14-pata",
+   "date": "2026-06-30",
+   "value": 5233.9
+  },
+  {
+   "meterId": "m-lipova14-teplo",
+   "date": "2025-12-31",
+   "value": 812.6
+  },
+  {
+   "meterId": "m-lipova14-teplo",
+   "date": "2026-06-30",
+   "value": 1203.2
+  }
+ ],
+ "suppliers": [
+  {
+   "id": "sup-vytahy",
+   "name": "Výtahy Praha a.s.",
+   "category": "VYTAHY",
+   "ico": "45270101",
+   "contactName": "Dispečink",
+   "phone": "+420 222 000 111",
+   "emergencyPhone": "+420 800 111 222",
+   "email": "servis@vytahy-ukazka.cz",
+   "note": "Ukázkový dodavatel. Servis výtahů Schindler a Otis, měsíční prohlídky."
+  },
+  {
+   "id": "sup-topeni",
+   "name": "Topení Novák s.r.o.",
+   "category": "TOPENI",
+   "ico": "27411502",
+   "contactName": "Pavel Novák",
+   "phone": "+420 731 222 333",
+   "emergencyPhone": "+420 731 222 300",
+   "email": "novak@topeni-ukazka.cz",
+   "note": "Ukázkový dodavatel. Kotelny, plynové kotle, revize plynu."
+  },
+  {
+   "id": "sup-klempir",
+   "name": "Klempířství Dvořák",
+   "category": "STRECHY",
+   "ico": "68112044",
+   "contactName": "Karel Dvořák",
+   "phone": "+420 777 444 555",
+   "email": "dvorak@klempir-ukazka.cz",
+   "note": "Ukázkový dodavatel. Okapy, svody, oplechování."
+  },
+  {
+   "id": "sup-elektro",
+   "name": "Elektro Bláha s.r.o.",
+   "category": "ELEKTRO",
+   "ico": "26190711",
+   "contactName": "Ing. Petr Bláha",
+   "phone": "+420 603 120 450",
+   "emergencyPhone": "+420 603 120 400",
+   "email": "blaha@elektro-ukazka.cz",
+   "note": "Ukázkový dodavatel. Opravy rozvodů, revize elektro a hromosvodů."
+  },
+  {
+   "id": "sup-voda",
+   "name": "Instalatérství Kolář",
+   "category": "VODA",
+   "ico": "71234567",
+   "contactName": "Radek Kolář",
+   "phone": "+420 776 900 321",
+   "emergencyPhone": "+420 776 900 300",
+   "email": "kolar@voda-ukazka.cz",
+   "note": "Ukázkový dodavatel. Havárie vody, stoupačky, ucpané odpady."
+  },
+  {
+   "id": "sup-kominik",
+   "name": "Kominictví Vlk",
+   "category": "KOMINY",
+   "ico": "65432101",
+   "contactName": "Jaroslav Vlk",
+   "phone": "+420 605 333 777",
+   "email": "vlk@kominik-ukazka.cz",
+   "note": "Ukázkový dodavatel. Kontroly a čištění spalinových cest."
+  },
+  {
+   "id": "sup-uklid",
+   "name": "Čistý dům s.r.o.",
+   "category": "UKLID",
+   "ico": "28877665",
+   "contactName": "Monika Svobodová",
+   "phone": "+420 724 555 012",
+   "email": "info@cistydum-ukazka.cz",
+   "note": "Ukázkový dodavatel. Týdenní úklid společných prostor."
+  },
+  {
+   "id": "sup-zamky",
+   "name": "Zámečnictví 24",
+   "category": "ZAMECNIK",
+   "ico": "87654321",
+   "contactName": "Pohotovost",
+   "phone": "+420 608 024 024",
+   "emergencyPhone": "+420 608 024 024",
+   "email": "zamky@zamecnik-ukazka.cz",
+   "note": "Ukázkový dodavatel. Nouzové otevírání, výměny vložek, generální klíč."
+  },
+  {
+   "id": "sup-pozar",
+   "name": "PO servis Hasák",
+   "category": "REVIZE",
+   "ico": "25678123",
+   "contactName": "Milan Hasák",
+   "phone": "+420 739 112 233",
+   "email": "hasak@po-ukazka.cz",
+   "note": "Ukázkový dodavatel. Hasicí přístroje, hydranty, požární dveře."
+  },
+  {
+   "id": "sup-derat",
+   "name": "Deratizace Novotný",
+   "category": "DERATIZACE",
+   "ico": "73302211",
+   "contactName": "Jan Novotný",
+   "phone": "+420 702 400 600",
+   "email": "novotny@derat-ukazka.cz",
+   "note": "Ukázkový dodavatel."
+  }
+ ],
+ "contracts": [
+  {
+   "id": "ct1",
+   "supplierId": "sup-vytahy",
+   "buildingId": "bd-vysluni3",
+   "title": "Servis a odborné prohlídky výtahu",
+   "validFrom": "2024-01-01",
+   "validTo": "2026-12-31",
+   "noticeDays": 90,
+   "autoRenew": true,
+   "price": "2 450 Kč / měsíc"
+  },
+  {
+   "id": "ct2",
+   "supplierId": "sup-vytahy",
+   "buildingId": "bd-krejcirova5",
+   "title": "Servis 8 výtahů, havarijní služba 24/7",
+   "validFrom": "2023-07-01",
+   "validTo": "2027-06-30",
+   "noticeDays": 90,
+   "autoRenew": false,
+   "price": "14 800 Kč / měsíc"
+  },
+  {
+   "id": "ct3",
+   "supplierId": "sup-topeni",
+   "buildingId": "bd-lipova14",
+   "title": "Provoz a servis domovní kotelny",
+   "validFrom": "2022-10-01",
+   "validTo": "2026-11-30",
+   "noticeDays": 60,
+   "autoRenew": false,
+   "price": "3 900 Kč / měsíc"
+  },
+  {
+   "id": "ct4",
+   "supplierId": "sup-uklid",
+   "buildingId": null,
+   "title": "Úklid společných prostor – rámcová smlouva",
+   "validFrom": "2025-01-01",
+   "validTo": null,
+   "noticeDays": 30,
+   "autoRenew": false,
+   "price": "dle domu"
+  },
+  {
+   "id": "ct5",
+   "supplierId": "sup-kominik",
+   "buildingId": null,
+   "title": "Roční kontroly spalinových cest",
+   "validFrom": "2024-01-01",
+   "validTo": "2026-12-31",
+   "noticeDays": 30,
+   "autoRenew": true,
+   "price": "650 Kč / průduch"
+  },
+  {
+   "id": "ct6",
+   "supplierId": "sup-pozar",
+   "buildingId": null,
+   "title": "Kontroly PHP, hydrantů a požárních dveří",
+   "validFrom": "2023-01-01",
+   "validTo": "2026-09-30",
+   "noticeDays": 30,
+   "autoRenew": false,
+   "price": "dle ceníku"
+  },
+  {
+   "id": "ct7",
+   "supplierId": "sup-derat",
+   "buildingId": "bd-palmovka2",
+   "title": "Pravidelná deratizace garáží",
+   "validFrom": "2025-04-01",
+   "validTo": "2027-03-31",
+   "noticeDays": 60,
+   "autoRenew": true,
+   "price": "1 200 Kč / zásah"
+  }
+ ],
+ "tickets": [
+  {
+   "id": "tk1",
+   "number": 1001,
+   "buildingId": "bd-korunni88",
+   "unitLabel": "byt 9, 4. NP",
+   "title": "Teče voda ze stropu v koupelně",
+   "description": "Od rána kape ze stropu koupelny, nad bytem je byt 12 (nikdo doma). Uzávěr stoupačky ve sklepě zatím nezavřen.",
+   "category": "VODA",
+   "urgency": "HAVARIE",
+   "status": "PREDANO",
+   "channel": "TELEFON",
+   "reporterName": "Hana Procházková",
+   "reporterPhone": "+420 739 211 845",
+   "supplierId": "sup-voda",
+   "hoursAgo": 5
+  },
+  {
+   "id": "tk2",
+   "number": 1002,
+   "buildingId": "bd-vysluni3",
+   "unitLabel": "vchod",
+   "title": "Nesvítí osvětlení na schodišti 5.–8. NP",
+   "category": "ELEKTRO",
+   "urgency": "VYSOKA",
+   "status": "PRIJATO",
+   "channel": "EMAIL",
+   "reporterName": "Josef Kučera",
+   "reporterEmail": "kucera@ukazka.cz",
+   "hoursAgo": 30
+  },
+  {
+   "id": "tk3",
+   "number": 1003,
+   "buildingId": "bd-krejcirova5",
+   "unitLabel": "vchod B",
+   "title": "Výtah stojí mezi patry, nikdo uvnitř",
+   "category": "VYTAH",
+   "urgency": "HAVARIE",
+   "status": "VYRESENO",
+   "channel": "TELEFON",
+   "reporterName": "Domovník",
+   "supplierId": "sup-vytahy",
+   "hoursAgo": 70,
+   "resolvedHours": 66
+  },
+  {
+   "id": "tk4",
+   "number": 1004,
+   "buildingId": "bd-lipova14",
+   "unitLabel": "sklep",
+   "title": "Zápach plynu u kotelny",
+   "description": "Nájemník cítil slabý zápach u dveří kotelny. Prověřit těsnost.",
+   "category": "TOPENI",
+   "urgency": "HAVARIE",
+   "status": "RESI_SE",
+   "channel": "TELEFON",
+   "reporterName": "Marie Dvořáková",
+   "reporterPhone": "+420 604 778 120",
+   "supplierId": "sup-topeni",
+   "hoursAgo": 2
+  },
+  {
+   "id": "tk5",
+   "number": 1005,
+   "buildingId": "bd-zelena21",
+   "unitLabel": "dvůr",
+   "title": "Spadlá větev na kontejnerovém stání",
+   "category": "ZELEN",
+   "urgency": "BEZNA",
+   "status": "NOVE",
+   "channel": "OSOBNE",
+   "reporterName": "Pavel Hájek",
+   "hoursAgo": 20
+  },
+  {
+   "id": "tk6",
+   "number": 1006,
+   "buildingId": "bd-palmovka2",
+   "unitLabel": "garáže",
+   "title": "Vrata do garáží se nezavírají",
+   "category": "ZAMKY",
+   "urgency": "VYSOKA",
+   "status": "NOVE",
+   "channel": "TELEFON",
+   "reporterName": "Ivana Marková",
+   "reporterPhone": "+420 721 330 900",
+   "hoursAgo": 8
+  },
+  {
+   "id": "tk7",
+   "number": 1007,
+   "buildingId": "bd-sumavska7",
+   "unitLabel": "byt 14",
+   "title": "Nefunguje zvonek a domácí telefon",
+   "category": "ZAMKY",
+   "urgency": "BEZNA",
+   "status": "PRIJATO",
+   "channel": "EMAIL",
+   "reporterName": "Lukáš Pokorný",
+   "hoursAgo": 100
+  },
+  {
+   "id": "tk8",
+   "number": 1008,
+   "buildingId": "bd-vlasska11",
+   "unitLabel": "půda",
+   "title": "Zatéká střechou u komínu",
+   "category": "STRECHA",
+   "urgency": "VYSOKA",
+   "status": "PREDANO",
+   "channel": "KONTROLA",
+   "reporterName": null,
+   "supplierId": "sup-klempir",
+   "hoursAgo": 96
+  },
+  {
+   "id": "tk9",
+   "number": 1009,
+   "buildingId": "bd-lipova14",
+   "unitLabel": "chodba 3. NP",
+   "title": "Nefunkční zářivky ve 3. NP",
+   "category": "ELEKTRO",
+   "urgency": "BEZNA",
+   "status": "VYRESENO",
+   "channel": "KONTROLA",
+   "hoursAgo": 240,
+   "resolvedHours": 200
+  },
+  {
+   "id": "tk10",
+   "number": 1010,
+   "buildingId": "bd-krejcirova5",
+   "unitLabel": "kolárna",
+   "title": "Rozbitá zámková vložka v kolárně",
+   "category": "ZAMKY",
+   "urgency": "BEZNA",
+   "status": "NOVE",
+   "channel": "OSOBNE",
+   "reporterName": "Ondřej Fiala",
+   "hoursAgo": 3
+  }
+ ]
+}

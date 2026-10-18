@@ -1,6 +1,7 @@
 'use client';
 import { useActionState, useEffect, useRef, useState } from 'react';
 import { useFormStatus } from 'react-dom';
+import { useRouter } from 'next/navigation';
 import type { FormState } from '@/app/actions';
 
 export function Submit({ children, pending: pendingLabel = 'Ukládám…', className = 'btn pri' }: {
@@ -33,13 +34,15 @@ export function AddPanel({
   const [open, setOpen] = useState(false);
   const [state, formAction] = useActionState(action, {});
   const formRef = useRef<HTMLFormElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (state.ok) {
       formRef.current?.reset();
       if (!keepOpen) setOpen(false);
+      router.refresh();
     }
-  }, [state.ok, keepOpen]);
+  }, [state.ok, keepOpen, router]);
 
   return (
     <>
@@ -140,14 +143,16 @@ export function ActionForm({
 }) {
   const [state, formAction] = useActionState(action, {});
   const formRef = useRef<HTMLFormElement>(null);
+  const router = useRouter();
   const [shownOk, setShownOk] = useState<number | undefined>(undefined);
   useEffect(() => {
     if (!state.ok) return;
+    router.refresh();
     if (resetOnSuccess) formRef.current?.reset();
     setShownOk(state.ok);
     const t = setTimeout(() => setShownOk(undefined), 2500);
     return () => clearTimeout(t);
-  }, [state.ok, resetOnSuccess]);
+  }, [state.ok, resetOnSuccess, router]);
   return (
     <form ref={formRef} action={formAction} className={className}>
       {children}
@@ -195,6 +200,40 @@ export function AutoSelect({
         className="mini"
         onChange={() => ref.current?.requestSubmit()}
       >
+        {options.map((o) => (
+          <option key={o.value} value={o.value}>
+            {o.label}
+          </option>
+        ))}
+      </select>
+    </form>
+  );
+}
+
+/** Výběr, který se uloží hned po změně: pošle id, field a value do zadané akce. */
+export function FieldSelect({
+  action,
+  id,
+  field,
+  value,
+  options,
+  label,
+  className,
+}: {
+  action: (fd: FormData) => Promise<void>;
+  id: string;
+  field: string;
+  value: string;
+  options: { value: string; label: string }[];
+  label: string;
+  className?: string;
+}) {
+  const ref = useRef<HTMLFormElement>(null);
+  return (
+    <form action={action} ref={ref} className={'tfield ' + (className ?? '')}>
+      <input type="hidden" name="id" value={id} />
+      <input type="hidden" name="field" value={field} />
+      <select name="value" defaultValue={value} aria-label={label} onChange={() => ref.current?.requestSubmit()}>
         {options.map((o) => (
           <option key={o.value} value={o.value}>
             {o.label}

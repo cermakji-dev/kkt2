@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export type NavItem = { href: string; label: string; icon: keyof typeof ICONS; count?: number };
+export type NavItem = { href: string; label: string; icon: keyof typeof ICONS; count?: number; hot?: boolean };
 
 const ICONS = {
   home: 'M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z',
@@ -13,6 +13,9 @@ const ICONS = {
   users: 'M16 20v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 20v-1a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8',
   clock: 'M12 7v5l3 2M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z',
   sun: 'M12 3v2M12 19v2M5 12H3M21 12h-2M6.3 6.3L4.9 4.9M19.1 19.1l-1.4-1.4M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',
+  alert: 'M12 3l9.5 16.5H2.5zM12 10v4M12 17.5h.01',
+  truck: 'M2 7h11v9H2zM13 10h4l3 3v3h-7M6 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM17 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4z',
+  grid: 'M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z',
 } as const;
 
 export function Icon({ name }: { name: keyof typeof ICONS }) {
@@ -36,7 +39,7 @@ export default function Nav({ items }: { items: NavItem[] }) {
         <Link key={it.href} href={it.href} aria-current={isActive(it.href) ? 'page' : undefined}>
           <Icon name={it.icon} />
           <span className="lbl">{it.label}</span>
-          {it.count ? <span className="n">{it.count}</span> : null}
+          {it.count ? <span className={'n' + (it.hot ? ' hot' : '')}>{it.count}</span> : null}
         </Link>
       ))}
     </nav>
@@ -52,7 +55,7 @@ export function TabBar({ items }: { items: NavItem[] }) {
         <Link key={it.href} href={it.href} aria-current={isActive(it.href) ? 'page' : undefined}>
           <span className="ic">
             <Icon name={it.icon} />
-            {it.count ? <span className="dot">{it.count > 99 ? '99+' : it.count}</span> : null}
+            {it.count ? <span className={'dot' + (it.hot ? ' hot' : '')}>{it.count > 99 ? '99+' : it.count}</span> : null}
           </span>
           <span>{it.label}</span>
         </Link>

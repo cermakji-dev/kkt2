@@ -5,12 +5,14 @@ import { Empty, InspectionRow, Panel } from '@/components/ui';
 import { AddInspection } from '@/components/add-forms';
 import { StartReport } from '@/components/start-report';
 import { ReportRow, reportInclude } from '@/components/report-list';
-import { daysUntil, latestPerType } from '@/lib/format';
+import { daysUntil, fmtDate, latestPerType } from '@/lib/format';
+import { REVISIONS, revisionMatrix, STATE_META } from '@/lib/revisions';
 
 export const dynamic = 'force-dynamic';
 
 const TABS = [
   { key: 'protokoly', label: 'Protokoly' },
+  { key: 'matice', label: 'Revize všech domů' },
   { key: 'plan', label: 'Plán revizí' },
   { key: 'historie', label: 'Historie' },
 ] as const;
@@ -22,7 +24,10 @@ export default async function Inspections({ searchParams }: { searchParams: Prom
   const tab: Tab = TABS.some((t) => t.key === raw) ? (raw as Tab) : 'protokoly';
   const [all, buildings, drafts, finals] = await Promise.all([
     prisma.inspection.findMany({ include: { building: { select: { id: true, name: true } } }, orderBy: { inspectedAt: 'desc' } }),
-    prisma.building.findMany({ select: { id: true, name: true, technicianId: true, referentId: true }, orderBy: { name: 'asc' } }),
+    prisma.building.findMany({
+      select: { id: true, name: true, technicianId: true, referentId: true, hasElevator: true, hasGas: true, hasBoiler: true, hasChimney: true, hasHydrants: true },
+      orderBy: { name: 'asc' },
+    }),
     prisma.inspectionReport.findMany({
       where: { status: 'DRAFT' },
       include: { ...reportInclude, building: { select: { id: true, name: true } } },
@@ -41,7 +46,9 @@ export default async function Inspections({ searchParams }: { searchParams: Prom
   const later = plan.filter((x) => !x.nextDue || daysUntil(x.nextDue) > 30);
   const mine = buildings.filter((b) => b.technicianId === me.id || b.referentId === me.id);
   const sorted = [...mine, ...buildings.filter((b) => !mine.includes(b))];
-  const count: Record<Tab, number> = { protokoly: drafts.length, plan: late.length + soon.length, historie: all.length };
+  const matrix = buildings.map((b) => ({ b, cells: revisionMatrix(b, all.filter((i) => i.buildingId === b.id)) }));
+  const problems = matrix.reduce((n, r) => n + r.cells.filter((c) => c.state === 'late' || c.state === 'missing').length, 0);
+  const count: Record<Tab, number> = { protokoly: drafts.length, matice: problems, plan: late.length + soon.length, historie: all.length };
 
   return (
     <>
@@ -84,6 +91,51 @@ export default async function Inspections({ searchParams }: { searchParams: Prom
             {finals.length ? finals.map((r) => <ReportRow key={r.id} r={r} />) : <Empty>Zatím žádný dokončený protokol.</Empty>}
           </Panel>
         </div>
+      )}
+
+      {tab === 'matice' && (
+        <section className="panel">
+          <header>
+            <h2>Zákonné revize podle domů</h2>
+            <span className="legend">
+              {(['late', 'soon', 'missing', 'ok'] as const).map((k) => (
+                <span key={k} className={'lg ' + STATE_META[k].tone}>
+                  {STATE_META[k].label}
+                </span>
+              ))}
+            </span>
+          </header>
+          <div className="tscroll">
+            <table className="dtable matrix">
+              <thead>
+                <tr>
+                  <th>Dům</th>
+                  {REVISIONS.map((r) => (
+                    <th key={r.key} title={`${r.label} – ${r.law}`}>
+                      <span className="vth">{r.label.replace('Revize ', '').replace('Kontrola ', '')}</span>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {matrix.map(({ b, cells }) => (
+                  <tr key={b.id}>
+                    <td>
+                      <Link href={`/buildings/${b.id}?tab=kontroly`} className="blink">
+                        {b.name}
+                      </Link>
+                    </td>
+                    {cells.map((c) => (
+                      <td key={c.rev.key} className={'mc ' + STATE_META[c.state].tone} title={`${c.rev.label}: ${STATE_META[c.state].label}${c.nextDue ? ' · ' + fmtDate(c.nextDue) : ''}`}>
+                        {c.state === 'na' ? '' : c.state === 'missing' ? '?' : c.nextDue ? fmtDate(c.nextDue).replace(/\. 20(\d\d)$/, '. $1') : ''}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
       )}
 
       {tab === 'plan' && (

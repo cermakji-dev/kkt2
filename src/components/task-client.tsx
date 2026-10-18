@@ -1,6 +1,7 @@
 'use client';
 import { useActionState, useEffect, useOptimistic, useRef, useState, useTransition } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useFormStatus } from 'react-dom';
 import type { FormState } from '@/app/actions';
 import { moveTask, toggleDone, updateTaskField } from '@/app/tasks/actions';
@@ -44,13 +45,15 @@ export function QuickAdd({
   const [state, formAction] = useActionState(action, {});
   const ref = useRef<HTMLFormElement>(null);
   const [focused, setFocused] = useState(false);
+  const router = useRouter();
   useEffect(() => {
     if (state.ok) {
+      router.refresh();
       const input = ref.current?.querySelector<HTMLInputElement>('input[name="title"]');
       if (input) input.value = '';
       input?.focus();
     }
-  }, [state.ok]);
+  }, [state.ok, router]);
   return (
     <form ref={ref} action={formAction} className={'quickadd' + (focused ? ' focus' : '')}>
       {Object.entries(hidden).map(([k, v]) => (

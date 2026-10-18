@@ -14,7 +14,6 @@ export async function updateMyProfile(_: FormState, fd: FormData): Promise<FormS
   const p = z.object({ name: optStr(120), phone: optStr(40) }).safeParse(Object.fromEntries(fd));
   if (!p.success) return { error: 'Neplatné údaje.' };
   await prisma.profile.update({ where: { id: me.id }, data: p.data });
-  revalidatePath('/', 'layout');
   return { ok: Date.now() };
 }
 

@@ -8,6 +8,21 @@ const PAGES: [string, string][] = [
   ['objekt-ukoly', '/buildings/bd-lipova14?tab=ukoly'],
   ['objekt-kontroly', '/buildings/bd-lipova14?tab=kontroly'],
   ['objekt-klice', '/buildings/bd-lipova14?tab=klice'],
+  ['objekt-dum', '/buildings/bd-lipova14?tab=dum'],
+  ['objekt-jednotky', '/buildings/bd-lipova14?tab=jednotky'],
+  ['objekt-meridla', '/buildings/bd-lipova14?tab=meridla'],
+  ['objekt-zavady', '/buildings/bd-korunni88?tab=zavady'],
+  ['objekt-dokumenty', '/buildings/bd-lipova14?tab=dokumenty'],
+  ['objekt-dodavatele', '/buildings/bd-vysluni3?tab=dodavatele'],
+  ['zavady', '/tickets'],
+  ['zavady-havarie', '/tickets?f=havarie'],
+  ['zavada-nova', '/tickets/new'],
+  ['zavada', '/tickets/tk1'],
+  ['dodavatele', '/suppliers'],
+  ['smlouvy', '/suppliers?tab=smlouvy'],
+  ['dodavatel', '/suppliers/sup-vytahy'],
+  ['vice', '/more'],
+  ['revize-matice', '/inspections?tab=matice'],
   ['ukoly', '/tasks'],
   ['ukoly-tym', '/tasks?s=team'],
   ['ukoly-nastenka', '/tasks?s=team&v=board'],
@@ -105,6 +120,24 @@ test.describe('akce', () => {
     const csv = await request.get('/attendance/export');
     expect(csv.status()).toBe(200);
     expect(await csv.text()).toContain('Odpracováno');
+  });
+
+  test('hlášení závady od zápisu po vyřešení', async ({ page }) => {
+    const errors = watch(page);
+    await page.goto('/tickets/new');
+    await page.getByLabel('Co se stalo *').fill('E2E kape kohoutek');
+    await page.getByLabel('Dům *').selectOption('bd-lipova14');
+    await page.getByRole('button', { name: 'Zapsat hlášení' }).click();
+    await expect(page.getByRole('heading', { name: 'E2E kape kohoutek' })).toBeVisible({ timeout: 15_000 });
+    await page.getByRole('button', { name: 'Přijmout' }).click();
+    await expect(page.locator('.pill', { hasText: 'Přijato' }).first()).toBeVisible();
+    await page.getByLabel('Poznámka').fill('Domluveno s instalatérem');
+    await page.locator('form:has(textarea[name="body"]) button').first().click();
+    await expect(page.getByText('Domluveno s instalatérem').first()).toBeVisible({ timeout: 15_000 });
+    await page.getByRole('button', { name: 'Vyřešeno' }).click();
+    await expect(page.locator('.pill', { hasText: 'Vyřešeno' }).first()).toBeVisible();
+    await page.screenshot({ path: 'e2e-shots/akce-zavada.png', fullPage: true });
+    expect(errors).toEqual([]);
   });
 
   test('rychlé přidání a odškrtnutí úkolu', async ({ page }) => {

@@ -1,6 +1,7 @@
 // Testovací data pro Playwright v CI. Vymyšlená, relativně k dnešku.
 import { PrismaClient } from '@prisma/client';
 import data from '../prisma/seed-data.json';
+import sbd from '../prisma/sbd-data.json';
 
 const prisma = new PrismaClient();
 const today = new Date(new Date().toISOString().slice(0, 10) + 'T00:00:00Z');
@@ -111,6 +112,39 @@ async function main() {
       { profileId: 'e2e-admin', type: 'DOVOLENA', from: day(-30), to: day(-28), days: 3, status: 'APPROVED', approverId: 'e2e-admin', decidedAt: day(-40) },
     ],
   });
+  // SBD: údaje domů, kontakty, jednotky, měřidla, dodavatelé, smlouvy, závady
+  for (const [id, info] of Object.entries(sbd.buildings)) await prisma.building.update({ where: { id }, data: info as never });
+  await prisma.buildingContact.createMany({ data: sbd.contacts as never });
+  await prisma.unit.createMany({ data: sbd.units as never });
+  await prisma.meter.createMany({ data: sbd.meters.map((m) => ({ ...m, verifiedUntil: m.verifiedUntil ? new Date(m.verifiedUntil) : null })) as never });
+  await prisma.meterReading.createMany({ data: sbd.readings.map((r) => ({ ...r, date: new Date(r.date) })) });
+  await prisma.supplier.createMany({ data: sbd.suppliers as never });
+  await prisma.contract.createMany({
+    data: sbd.contracts.map((c) => ({ ...c, validFrom: c.validFrom ? new Date(c.validFrom) : null, validTo: c.validTo ? new Date(c.validTo) : null })) as never,
+  });
+  const H = 3_600_000;
+  const URG_H: Record<string, number> = { HAVARIE: 24, VYSOKA: 72, BEZNA: 336 };
+  for (const t of sbd.tickets as (Record<string, unknown> & { id: string; hoursAgo: number; resolvedHours?: number; urgency: string; buildingId: string; supplierId?: string | null })[]) {
+    const { hoursAgo, resolvedHours, ...rest } = t;
+    const createdAt = new Date(Date.now() - hoursAgo * H);
+    await prisma.ticket.create({
+      data: {
+        ...(rest as never),
+        assigneeId: techOf.get(t.buildingId) ?? null,
+        createdAt,
+        dueAt: new Date(createdAt.getTime() + URG_H[t.urgency] * H),
+        resolvedAt: resolvedHours != null ? new Date(Date.now() - resolvedHours * H) : null,
+        events: {
+          create: [
+            { kind: 'STATUS', body: 'Hlášení přijato do systému', createdAt },
+            ...(t.supplierId ? [{ kind: 'STATUS', body: 'Předáno dodavateli', createdAt: new Date(createdAt.getTime() + 20 * 60_000) }] : []),
+            ...(t.id === 'tk1' ? [{ kind: 'COMMENT', body: 'Instalatér dorazí do hodiny, stoupačka zavřena.', authorId: 'e2e-admin' }] : []),
+          ],
+        },
+      },
+    });
+  }
+  await prisma.$executeRawUnsafe(`SELECT setval('"Ticket_number_seq"', 1010)`);
   console.log('E2E seed hotov');
 }
 

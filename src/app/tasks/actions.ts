@@ -36,7 +36,6 @@ export async function quickAdd(_: FormState, fd: FormData): Promise<FormState> {
     },
   });
   elog('quickAdd created');
-  refresh();
   elog('quickAdd revalidated');
   return { ok: Date.now() };
 }
@@ -107,7 +106,6 @@ export async function addComment(_: FormState, fd: FormData): Promise<FormState>
   const p = z.object({ taskId: id, body: z.string().trim().min(1).max(4000) }).safeParse(Object.fromEntries(fd));
   if (!p.success) return { error: 'Napište komentář.' };
   await prisma.taskComment.create({ data: { taskId: p.data.taskId, body: p.data.body, authorId: me.id } });
-  revalidatePath('/tasks');
   return { ok: Date.now() };
 }
 

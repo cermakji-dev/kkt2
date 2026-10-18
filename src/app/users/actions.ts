@@ -39,7 +39,6 @@ export async function createUser(_: FormState, fd: FormData): Promise<FormState>
   await prisma.profile.create({
     data: { id: data.user.id, email: p.data.email, name: p.data.name, role: p.data.role },
   });
-  revalidatePath('/users');
   return { ok: Date.now() };
 }
 
@@ -67,7 +66,6 @@ export async function updateUser(_: FormState, fd: FormData): Promise<FormState>
   if (admin && !p.data.id.startsWith('demo-')) {
     await admin.auth.admin.updateUserById(p.data.id, { ban_duration: p.data.active ? 'none' : '876000h' });
   }
-  revalidatePath('/', 'layout');
   return { ok: Date.now() };
 }
 

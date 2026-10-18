@@ -34,7 +34,6 @@ export async function addManual(_: FormState, fd: FormData): Promise<FormState> 
   await prisma.attendanceEvent.create({
     data: { profileId: p.data.profileId, kind: p.data.kind, at, note: p.data.note || 'Doplněno ručně', createdById: me.id },
   });
-  revalidatePath('/attendance');
   return { ok: Date.now() };
 }
 

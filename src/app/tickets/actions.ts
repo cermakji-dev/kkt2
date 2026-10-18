@@ -98,7 +98,6 @@ export async function addTicketComment(_: FormState, fd: FormData): Promise<Form
   const p = z.object({ ticketId: z.string().min(1), body: z.string().trim().min(1).max(4000) }).safeParse(Object.fromEntries(fd));
   if (!p.success) return { error: 'Napište poznámku.' };
   await prisma.ticketEvent.create({ data: { ticketId: p.data.ticketId, body: p.data.body, authorId: me.id } });
-  revalidatePath(`/tickets/${p.data.ticketId}`);
   return { ok: Date.now() };
 }
 

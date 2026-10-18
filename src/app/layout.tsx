@@ -51,18 +51,23 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     );
   }
 
-  const [myTasks, lent] = await Promise.all([
-    prisma.task.count({ where: { status: { not: 'DONE' }, assigneeId: user.id } }),
+  const [myTasks, lent, tickets, havarie] = await Promise.all([
+    prisma.task.count({ where: { status: { not: 'DONE' }, assigneeId: user.id, parentId: null } }),
     prisma.keySet.count({ where: { holder: { not: null } } }),
+    prisma.ticket.count({ where: { status: { in: ['NOVE', 'PRIJATO', 'PREDANO', 'RESI_SE'] } } }),
+    prisma.ticket.count({ where: { status: { in: ['NOVE', 'PRIJATO', 'PREDANO', 'RESI_SE'] }, urgency: 'HAVARIE' } }),
   ]);
   elog('layout counts');
   const main: NavItem[] = [
     { href: '/', label: 'Přehled', icon: 'home' },
     { href: '/buildings', label: 'Objekty', icon: 'building' },
+    { href: '/tickets', label: 'Závady', icon: 'alert', count: tickets, hot: havarie > 0 },
     { href: '/tasks', label: 'Úkoly', icon: 'check', count: myTasks },
-    { href: '/keys', label: 'Klíče', icon: 'key', count: lent },
     { href: '/inspections', label: 'Kontroly', icon: 'clipboard' },
+    { href: '/keys', label: 'Klíče', icon: 'key', count: lent },
+    { href: '/suppliers', label: 'Dodavatelé', icon: 'truck' },
   ];
+  const tab: NavItem[] = [main[0], main[1], main[2], main[3], { href: '/more', label: 'Více', icon: 'grid' }];
   const pendingLeaves = user.role === 'ADMIN' ? await prisma.leaveRequest.count({ where: { status: 'PENDING' } }) : 0;
   const side: NavItem[] = [
     ...main,
@@ -119,7 +124,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             </div>
           </header>
           <main className="work">{children}</main>
-          <TabBar items={main} />
+          <TabBar items={tab} />
         </div>
       </body>
     </html>

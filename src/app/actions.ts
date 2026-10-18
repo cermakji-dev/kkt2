@@ -37,10 +37,8 @@ function fields(fd: FormData) {
   return Object.fromEntries([...fd.entries()].map(([k, v]) => [k, typeof v === 'string' ? v : '']));
 }
 
-function done(): FormState {
-  revalidatePath('/', 'layout');
-  return { ok: Date.now() };
-}
+// Formuláře s výsledkem si po úspěchu obnoví stránku samy (router.refresh),
+// odpověď akce tak nenese celé překreslení stránky.
 
 // ---------- Objekty ----------
 const buildingSchema = z.object({
@@ -59,7 +57,7 @@ export async function createBuilding(_: FormState, fd: FormData): Promise<FormSt
   const p = buildingSchema.safeParse(fields(fd));
   if (!p.success) return { error: 'Vyplňte název a adresu objektu.' };
   await prisma.building.create({ data: p.data });
-  return done();
+  return { ok: Date.now() };
 }
 
 export async function deleteBuilding(fd: FormData) {
@@ -91,7 +89,7 @@ export async function assignBuilding(_: FormState, fd: FormData): Promise<FormSt
     where: { id: p.data.id },
     data: { technicianId: p.data.technicianId, referentId: p.data.referentId },
   });
-  return done();
+  return { ok: Date.now() };
 }
 
 // ---------- Úkoly ----------
@@ -115,7 +113,7 @@ export async function createTask(_: FormState, fd: FormData): Promise<FormState>
     assigneeId = b?.technicianId ?? null;
   }
   await prisma.task.create({ data: { ...data, assigneeId } });
-  return done();
+  return { ok: Date.now() };
 }
 
 export async function assignTask(fd: FormData) {
@@ -164,7 +162,7 @@ export async function createKey(_: FormState, fd: FormData): Promise<FormState> 
     }
     throw e;
   }
-  return done();
+  return { ok: Date.now() };
 }
 
 export async function deleteKey(fd: FormData) {
@@ -190,7 +188,7 @@ export async function createInspection(_: FormState, fd: FormData): Promise<Form
   // Bez ručně zadaného termínu se další termín dopočítá ze zákonného intervalu.
   const nextDue = p.data.nextDue ?? defaultNextDue(p.data.type, p.data.inspectedAt);
   await prisma.inspection.create({ data: { ...p.data, nextDue } });
-  return done();
+  return { ok: Date.now() };
 }
 
 export async function deleteInspection(fd: FormData) {

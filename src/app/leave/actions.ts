@@ -56,7 +56,6 @@ export async function requestLeave(_: FormState, fd: FormData): Promise<FormStat
       decidedAt: p.data.type === 'SICK_DAY' ? new Date() : null,
     },
   });
-  revalidatePath('/leave');
   return { ok: Date.now() };
 }
 
@@ -91,6 +90,5 @@ export async function setEntitlement(_: FormState, fd: FormData): Promise<FormSt
   const p = entSchema.safeParse(Object.fromEntries(fd));
   if (!p.success) return { error: 'Neplatný nárok.' };
   await prisma.profile.update({ where: { id: p.data.id }, data: { vacationDays: p.data.vacationDays, sickDays: p.data.sickDays } });
-  revalidatePath('/leave');
   return { ok: Date.now() };
 }

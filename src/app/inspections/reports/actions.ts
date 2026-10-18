@@ -173,8 +173,6 @@ export async function finalizeReport(id: string): Promise<{ error?: string }> {
       ),
     prisma.inspectionReport.update({ where: { id }, data: { status: 'FINAL', finalizedAt: new Date() } }),
   ]);
-  elog('finalize done tx');
-  revalidatePath('/', 'layout');
-  elog('finalize revalidated');
+  elog('finalize done');
   return {};
 }
