@@ -10,9 +10,9 @@ const optStr = (max: number) =>
   z.string().trim().max(max).optional().transform((v) => (v ? v : null));
 
 /** data:image/png;base64,... → bajty (max ~300 kB). */
-function decodeSignature(v: FormDataEntryValue | null): Buffer | null {
+function decodeSignature(v: FormDataEntryValue | null): Uint8Array<ArrayBuffer> | null {
   if (typeof v !== 'string' || !v.startsWith('data:image/png;base64,')) return null;
-  const b = Buffer.from(v.slice('data:image/png;base64,'.length), 'base64');
+  const b = new Uint8Array(Buffer.from(v.slice('data:image/png;base64,'.length), 'base64'));
   return b.length > 0 && b.length < 300_000 ? b : null;
 }
 
