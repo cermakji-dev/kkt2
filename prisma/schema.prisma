@@ -26,7 +26,11 @@ model Task {
   building   Building @relation(fields: [buildingId], references: [id], onDelete: Restrict)
   createdAt  DateTime @default(now())
 }
-enum TaskStatus { OPEN IN_PROGRESS DONE }
+enum TaskStatus {
+  OPEN
+  IN_PROGRESS
+  DONE
+}
 model KeySet {
   id         String @id @default(cuid())
   code       String @unique
