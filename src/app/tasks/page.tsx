@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { getUser, initials } from '@/lib/auth';
-import { TaskItem, taskItemInclude } from '@/components/task-item';
+import { TaskHead, TaskItem, taskItemInclude } from '@/components/task-item';
 import { TaskPanel } from '@/components/task-panel';
 import { Board, QuickAdd } from '@/components/task-client';
 import { quickAdd } from './actions';
@@ -150,6 +150,7 @@ export default async function Tasks({
         <Board cards={boardCards} />
       ) : scope === 'done' ? (
         <section className="tlist">
+          <TaskHead />
           {tasks.map((t) => (
             <TaskItem key={t.id} t={t} href={taskHref(t.id)} />
           ))}
@@ -161,17 +162,21 @@ export default async function Tasks({
           <span>{scope === 'mine' && unassignedCount > 0 ? <Link href={q({ s: 'unassigned' })}>Převzít některý z {unassignedCount} nepřiřazených úkolů →</Link> : 'Nový úkol přidáte řádkem výše.'}</span>
         </div>
       ) : (
-        BUCKETS.filter((b) => groups.has(b.key)).map((b) => (
-          <section key={b.key} className={'tlist tgroup-' + b.key}>
-            <h3 className="tgroup-h">
-              {b.label}
-              <span className="count">{groups.get(b.key)!.length}</span>
-            </h3>
-            {groups.get(b.key)!.map((t) => (
-              <TaskItem key={t.id} t={t} href={taskHref(t.id)} showStatus />
-            ))}
-          </section>
-        ))
+        <section className="tlist">
+          <TaskHead />
+          {BUCKETS.filter((b) => groups.has(b.key)).map((b) => (
+            <details key={b.key} className={'tgroup tgroup-' + b.key} open>
+              <summary className="tgroup-h">
+                <span className="chev" aria-hidden="true" />
+                {b.label}
+                <span className="count">{groups.get(b.key)!.length}</span>
+              </summary>
+              {groups.get(b.key)!.map((t) => (
+                <TaskItem key={t.id} t={t} href={taskHref(t.id)} />
+              ))}
+            </details>
+          ))}
+        </section>
       )}
 
       {sp.t && <TaskPanel id={sp.t} closeHref={base} />}

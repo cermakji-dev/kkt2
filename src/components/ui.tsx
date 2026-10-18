@@ -149,7 +149,7 @@ export function KeyRow({
   );
 }
 
-export function InspectionRow({ x, showBuilding = true }: { x: Inspection & Partial<Named>; showBuilding?: boolean }) {
+export function InspectionRow({ x, showBuilding = true, canDelete = false }: { x: Inspection & Partial<Named>; showBuilding?: boolean; canDelete?: boolean }) {
   const due = dueTone(x.nextDue);
   return (
     <div className="row">
@@ -167,7 +167,7 @@ export function InspectionRow({ x, showBuilding = true }: { x: Inspection & Part
       <div className="acts">
         <span className="lbl">další</span>
         <Pill tone={due.tone}>{due.label}</Pill>
-        <DeleteButton action={deleteInspection} id={x.id} />
+        {canDelete && <DeleteButton action={deleteInspection} id={x.id} />}
       </div>
     </div>
   );

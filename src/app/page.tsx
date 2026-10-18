@@ -77,7 +77,7 @@ export default async function Home() {
         </Link>
       </div>
 
-      <div className="grid2">
+      <div className="grid2 wide3">
         <Panel title="Moje úkoly" count={myTasks.length} action={<Link href="/tasks" className="more">Všechny →</Link>}>
           {upcoming.length ? (
             upcoming.map((t) => <TaskItem key={t.id} t={t} href={`/tasks?t=${t.id}`} />)
@@ -85,8 +85,7 @@ export default async function Home() {
             <Empty>Žádné otevřené úkoly. {unassigned > 0 && <Link href="/tasks?s=unassigned">Převzít nepřiřazené →</Link>}</Empty>
           )}
         </Panel>
-        <div className="stack">
-          <Panel title="Blížící se kontroly" action={<Link href="/inspections" className="more">Plán →</Link>}>
+        <Panel title="Blížící se kontroly" action={<Link href="/inspections" className="more">Plán →</Link>}>
             {soon.length ? (
               soon.slice(0, 6).map((x) => <InspectionRow key={x.id} x={x} />)
             ) : (
@@ -96,7 +95,6 @@ export default async function Home() {
           <Panel title="Klíče venku" count={lent.length}>
             {lent.length ? lent.map((k) => <KeyRow key={k.id} k={k} />) : <Empty>Všechny klíče jsou v kanceláři.</Empty>}
           </Panel>
-        </div>
       </div>
     </>
   );

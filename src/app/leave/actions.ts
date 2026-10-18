@@ -11,7 +11,7 @@ const date = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).transform((v) => new Date(v
 const reqSchema = z.object({
   type: z.enum(['DOVOLENA', 'SICK_DAY']),
   from: date,
-  to: date.optional(),
+  to: z.preprocess((v) => (v === '' ? undefined : v), date.optional()),
   half: z.string().optional(),
   note: z.string().trim().max(500).optional(),
 });

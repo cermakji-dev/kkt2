@@ -32,6 +32,13 @@ const SIZES = [
 
 fs.mkdirSync('e2e-shots', { recursive: true });
 
+test.afterEach(async ({ page }, info) => {
+  if (info.status !== info.expectedStatus) {
+    const name = info.titlePath.slice(1).join('-').replace(/[^\w-]+/g, '_').slice(0, 80);
+    await page.screenshot({ path: `e2e-shots/CHYBA-${name}.png`, fullPage: true }).catch(() => {});
+  }
+});
+
 function watch(page: Page) {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push('pageerror: ' + e.message));

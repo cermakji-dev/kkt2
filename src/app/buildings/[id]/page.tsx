@@ -11,7 +11,7 @@ import { displayName, getUser, initials } from '@/lib/auth';
 import { activePeople } from '@/lib/people';
 import { StartReport } from '@/components/start-report';
 import { ReportRow, reportInclude } from '@/components/report-list';
-import { TaskItem, taskItemInclude } from '@/components/task-item';
+import { TaskHead, TaskItem, taskItemInclude } from '@/components/task-item';
 import { QuickAdd } from '@/components/task-client';
 import { buildingHealth } from '@/lib/health';
 import { sortTasks } from '@/lib/tasks';
@@ -105,7 +105,7 @@ export default async function BuildingDetail({ params, searchParams }: { params:
       </nav>
 
       {tab === 'prehled' && (
-        <div className="grid2">
+        <div className="grid2 wide3">
           <div className="stack">
             <section className={'panel healthcard ' + health.tone}>
               <header>
@@ -135,6 +135,8 @@ export default async function BuildingDetail({ params, searchParams }: { params:
             <Panel title="Klíče venku" count={keysOut.length}>
               {keysOut.length ? keysOut.map((k) => <KeyRow key={k.id} k={k} loan={k.loans[0]} showBuilding={false} />) : <Empty>Všechny klíče jsou v kanceláři.</Empty>}
             </Panel>
+          </div>
+          <div className="stack">
             {b.notes && (
               <section className="panel">
                 <header>
@@ -187,11 +189,12 @@ export default async function BuildingDetail({ params, searchParams }: { params:
       {tab === 'ukoly' && (
         <>
           <QuickAdd action={quickAdd} placeholder={`Nový úkol pro ${b.name}… (Enter)`} hidden={{ buildingId: b.id, ...(b.technicianId ? { assigneeId: b.technicianId } : {}) }} />
-          <section className="tlist">
+          <section className="tlist no-bld">
+            <TaskHead showBuilding={false} />
             {open.length ? open.map((t) => <TaskItem key={t.id} t={t} href={`/tasks?b=${b.id}&s=team&t=${t.id}`} showBuilding={false} showStatus />) : <div className="empty">Žádné otevřené úkoly.</div>}
           </section>
           {done.length > 0 && (
-            <section className="tlist">
+            <section className="tlist no-bld">
               <h3 className="tgroup-h">
                 Dokončené<span className="count">{done.length}</span>
               </h3>

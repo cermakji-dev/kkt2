@@ -106,7 +106,7 @@ export default async function Inspections({ searchParams }: { searchParams: Prom
 
       {tab === 'historie' && (
         <Panel title="Všechny záznamy" count={all.length}>
-          {all.length ? all.map((x) => <InspectionRow key={x.id} x={x} />) : <Empty>Historie je prázdná.</Empty>}
+          {all.length ? all.map((x) => <InspectionRow key={x.id} x={x} canDelete={me.role === 'ADMIN'} />) : <Empty>Historie je prázdná.</Empty>}
         </Panel>
       )}
     </>
