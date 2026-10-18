@@ -7,6 +7,7 @@ import { prisma } from '@/lib/prisma';
 import { requireUser } from '@/lib/auth';
 import { startOfToday } from '@/lib/format';
 import { getTemplate, itemKey, reportStats, type ItemsMap } from '@/lib/templates';
+import { elog } from '@/lib/e2e';
 
 const DAY = 86_400_000;
 
@@ -122,6 +123,7 @@ export async function deleteReport(fd: FormData) {
 }
 
 export async function finalizeReport(id: string): Promise<{ error?: string }> {
+  elog('finalize start', id);
   await requireUser();
   const r = await draftOrThrow(id);
   const t = getTemplate(r.template);
@@ -171,6 +173,8 @@ export async function finalizeReport(id: string): Promise<{ error?: string }> {
       ),
     prisma.inspectionReport.update({ where: { id }, data: { status: 'FINAL', finalizedAt: new Date() } }),
   ]);
+  elog('finalize done tx');
   revalidatePath('/', 'layout');
+  elog('finalize revalidated');
   return {};
 }

@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import Nav, { TabBar, type NavItem } from '@/components/nav';
 import { displayName, getUser, initials, ROLE_LABEL } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { elog } from '@/lib/e2e';
 
 const body = Geist({ subsets: ['latin', 'latin-ext'], variable: '--font-body', display: 'swap' });
 const mono = Geist_Mono({ subsets: ['latin', 'latin-ext'], variable: '--font-mono', display: 'swap' });
@@ -23,7 +24,9 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  elog('layout start');
   const user = await getUser();
+  elog('layout user');
   const fonts = `${body.variable} ${mono.variable}`;
 
   if (!user || !user.active) {
@@ -52,6 +55,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     prisma.task.count({ where: { status: { not: 'DONE' }, assigneeId: user.id } }),
     prisma.keySet.count({ where: { holder: { not: null } } }),
   ]);
+  elog('layout counts');
   const main: NavItem[] = [
     { href: '/', label: 'Přehled', icon: 'home' },
     { href: '/buildings', label: 'Objekty', icon: 'building' },

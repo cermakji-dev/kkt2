@@ -8,6 +8,7 @@ import { Board, QuickAdd } from '@/components/task-client';
 import { quickAdd } from './actions';
 import { BUCKETS, bucketOf, dueLabel, PRIORITY, sortTasks, type Bucket } from '@/lib/tasks';
 import { startOfToday } from '@/lib/format';
+import { elog } from '@/lib/e2e';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,6 +25,7 @@ export default async function Tasks({
 }: {
   searchParams: Promise<{ s?: string; v?: string; b?: string; t?: string }>;
 }) {
+  elog('tasks page start');
   const me = (await getUser())!;
   const sp = await searchParams;
   const scope: Scope = SCOPES.some((x) => x.key === sp.s) ? (sp.s as Scope) : 'mine';
@@ -64,6 +66,7 @@ export default async function Tasks({
       _count: { _all: true },
     }),
   ]);
+  elog('tasks page data');
   const mineCount = counts.find((c) => c.assigneeId === me.id)?._count._all ?? 0;
   const unassignedCount = counts.find((c) => c.assigneeId === null)?._count._all ?? 0;
   const teamCount = counts.reduce((a, c) => a + c._count._all, 0);

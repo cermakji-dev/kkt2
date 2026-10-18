@@ -14,7 +14,10 @@ export type CurrentUser = Profile;
  */
 export const getUser = cache(async (): Promise<CurrentUser | null> => {
   const e2e = e2eUserId();
-  if (e2e) return prisma.profile.findUnique({ where: { id: e2e } });
+  if (e2e) {
+    const p = await prisma.profile.findUnique({ where: { id: e2e } });
+    return p;
+  }
   const supabase = await createClient();
   const { data, error } = await supabase.auth.getClaims();
   const sub = data?.claims?.sub;

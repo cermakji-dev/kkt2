@@ -5,12 +5,15 @@ import type { Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { requireUser } from '@/lib/auth';
 import type { FormState } from '@/app/actions';
+import { elog } from '@/lib/e2e';
 
 const id = z.string().min(1).max(64);
 const refresh = () => revalidatePath('/', 'layout');
 
 export async function quickAdd(_: FormState, fd: FormData): Promise<FormState> {
+  elog('quickAdd start');
   const me = await requireUser();
+  elog('quickAdd user', me.id);
   const p = z
     .object({
       title: z.string().trim().min(1).max(200),
@@ -32,7 +35,9 @@ export async function quickAdd(_: FormState, fd: FormData): Promise<FormState> {
       createdById: me.id,
     },
   });
+  elog('quickAdd created');
   refresh();
+  elog('quickAdd revalidated');
   return { ok: Date.now() };
 }
 
