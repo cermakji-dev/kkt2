@@ -6,7 +6,7 @@ export default defineConfig({
   retries: 0,
   workers: 1,
   reporter: [['github'], ['list']],
-  use: { baseURL: 'http://localhost:3000', locale: 'cs-CZ', timezoneId: 'Europe/Prague', colorScheme: 'dark' },
+  use: { baseURL: 'http://localhost:3000', locale: 'cs-CZ', timezoneId: 'Europe/Prague', colorScheme: 'dark', trace: 'retain-on-failure' },
   webServer: {
     command: 'mkdir -p e2e-shots && npm run start > e2e-shots/server.log 2>&1',
     url: 'http://localhost:3000/login',

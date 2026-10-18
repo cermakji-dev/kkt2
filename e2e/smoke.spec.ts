@@ -62,9 +62,21 @@ function watch(page: Page) {
   const started = new Map<string, number>();
   page.on('request', (r) => {
     if (r.method() === 'POST') started.set(r.url() + '#' + r.postData()?.slice(0, 40), Date.now());
+    else if (r.headers()['rsc'] || r.url().includes('_rsc=')) {
+      started.set('GET ' + r.url(), Date.now());
+      netlog.push(`${new Date().toISOString()} START RSC ${r.url()} prefetch=${r.headers()['next-router-prefetch'] ?? ''}`);
+    }
+  });
+  page.on('response', (res) => {
+    const r = res.request();
+    if (r.method() !== 'POST' && (r.headers()['rsc'] || r.url().includes('_rsc='))) netlog.push(`${new Date().toISOString()} HEADERS RSC ${r.url()} ${res.status()}`);
   });
   page.on('requestfinished', async (r) => {
-    if (r.method() !== 'POST') return;
+    if (r.method() !== 'POST') {
+      const t0 = started.get('GET ' + r.url());
+      if (t0) netlog.push(`${new Date().toISOString()} DONE RSC ${r.url()} ${Date.now() - t0}ms`);
+      return;
+    }
     const res = await r.response();
     const t0 = started.get(r.url() + '#' + r.postData()?.slice(0, 40));
     let body = '';
@@ -146,7 +158,7 @@ test.describe('akce', () => {
     await page.getByLabel('Název úkolu').fill('E2E testovací úkol');
     await page.getByLabel('Název úkolu').press('Enter');
     await expect(page.getByText('E2E testovací úkol').first()).toBeVisible({ timeout: 15_000 });
-    const row = page.locator('.titem', { hasText: 'E2E testovací úkol' });
+    const row = page.locator('.trow', { hasText: 'E2E testovací úkol' });
     await row.getByRole('button', { name: 'Označit jako hotové' }).click();
     await expect(row.getByRole('button', { name: 'Vrátit mezi nehotové' })).toBeVisible();
     await page.goto('/tasks?s=team&t=t2');

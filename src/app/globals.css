@@ -682,8 +682,8 @@ form.readform .err { font-size: 12px; }
 }
 .urg { border: 0; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .urg legend { font-size: 12.5px; font-weight: 500; color: var(--muted); margin-bottom: 6px; padding: 0; }
-.urg-opt { cursor: pointer; display: grid !important; gap: 2px !important; padding: 10px 12px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--sunk); text-transform: none !important; letter-spacing: 0 !important; }
-.urg-opt input { position: absolute; opacity: 0; pointer-events: none; }
+.urg-opt { position: relative; cursor: pointer; display: grid !important; gap: 2px !important; padding: 10px 12px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--sunk); text-transform: none !important; letter-spacing: 0 !important; }
+.urg-opt input { position: absolute; top: 0; left: 0; width: 1px !important; height: 1px !important; min-width: 0 !important; padding: 0 !important; opacity: 0; pointer-events: none; }
 .urg-opt b { color: var(--fg); font-size: 14px; }
 .urg-opt small { color: var(--muted); font-size: 12px; font-weight: 400; }
 .urg-opt:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }

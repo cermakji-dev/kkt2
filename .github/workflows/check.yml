@@ -57,6 +57,7 @@ jobs:
         if: always() && github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           [ -d e2e-shots ] || exit 0
+          mkdir -p e2e-shots/traces && find test-results -name trace.zip | while read f; do cp "$f" "e2e-shots/traces/$(basename $(dirname "$f")).zip"; done || true
           cd e2e-shots
           git init -q && git checkout -q -b e2e-shots
           git add -A
