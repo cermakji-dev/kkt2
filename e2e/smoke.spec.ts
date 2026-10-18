@@ -52,11 +52,19 @@ function watch(page: Page) {
     if (r.method() !== 'POST') return;
     const res = await r.response();
     const t0 = started.get(r.url() + '#' + r.postData()?.slice(0, 40));
-    netlog.push(`${new Date().toISOString()} POST ${r.url()} ${res?.status()} ${t0 ? Date.now() - t0 : '?'}ms action=${r.headers()['next-action'] ?? ''}`);
+    let body = '';
+    try {
+      body = (await res?.text())?.slice(0, 600).replace(/\n/g, '⏎') ?? '';
+    } catch {}
+    netlog.push(`${new Date().toISOString()} POST ${r.url()} ${res?.status()} ${t0 ? Date.now() - t0 : '?'}ms action=${r.headers()['next-action'] ?? ''} ct=${res?.headers()['content-type']} body=${body}`);
   });
   page.on('requestfailed', (r) => netlog.push(`FAILED ${r.method()} ${r.url()} ${r.failure()?.errorText}`));
-  page.on('pageerror', (e) => errors.push('pageerror: ' + e.message));
+  page.on('pageerror', (e) => {
+    errors.push('pageerror: ' + e.message);
+    netlog.push('PAGEERROR ' + page.url() + ' ' + e.message + '\n' + (e.stack ?? '').slice(0, 1500));
+  });
   page.on('console', (m) => {
+    if (m.type() === 'error' || m.type() === 'warning') netlog.push(`CONSOLE.${m.type()} ${page.url()} ${m.text().slice(0, 1500)}`);
     if (m.type() === 'error' && !/favicon|Download the React DevTools/.test(m.text())) errors.push('console: ' + m.text());
   });
   return errors;
