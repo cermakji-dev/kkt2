@@ -28,7 +28,13 @@ jobs:
       # TODO: po commitnutí package-lock.json vrátit `npm ci` a `cache: npm`
       - run: npm install
       - name: Prisma db push
-        run: npx prisma db push 2>&1 | tee /tmp/push.log; test ${PIPESTATUS[0]} -eq 0 || { echo "::error title=prisma db push::$(tail -c 1800 /tmp/push.log | tr '\n' ' ')"; exit 1; }
+        run: |
+          set -o pipefail
+          npx prisma db push 2>&1 | tee /tmp/push.log || {
+            sed -e 's/\x1b\[[0-9;]*m//g' /tmp/push.log | grep -v '^\s*$' | tail -c 3000 | sed -e 's/%/%25/g' | tr '\n' ' ' > /tmp/err.txt
+            echo "::error title=prisma::$(cat /tmp/err.txt)"
+            exit 1
+          }
         shell: bash
       - name: Build
         run: |
