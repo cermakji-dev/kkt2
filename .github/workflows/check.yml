@@ -29,5 +29,11 @@ jobs:
         run: npx prisma db push 2>&1 | tee /tmp/push.log; test ${PIPESTATUS[0]} -eq 0 || { echo "::error title=prisma db push::$(tail -c 1800 /tmp/push.log | tr '\n' ' ')"; exit 1; }
         shell: bash
       - name: Build
-        run: npm run build 2>&1 | tee /tmp/build.log; test ${PIPESTATUS[0]} -eq 0 || { echo "::error title=build::$(grep -v '^\s*$' /tmp/build.log | tail -c 3000 | tr '\n' ' ')"; exit 1; }
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee /tmp/build.log || {
+            sed -e 's/\x1b\[[0-9;]*m//g' /tmp/build.log | grep -v '^\s*$' | grep -iE -B2 -A12 'error|failed|type ' | tail -c 3500 | sed -e 's/%/%25/g' | tr '\n' ' ' > /tmp/err.txt
+            echo "::error title=build::$(cat /tmp/err.txt)"
+            exit 1
+          }
         shell: bash
