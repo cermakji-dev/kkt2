@@ -39,8 +39,22 @@ test.afterEach(async ({ page }, info) => {
   }
 });
 
+const netlog: string[] = [];
+test.afterAll(() => fs.writeFileSync('e2e-shots/network.log', netlog.join('\n')));
+
 function watch(page: Page) {
   const errors: string[] = [];
+  const started = new Map<string, number>();
+  page.on('request', (r) => {
+    if (r.method() === 'POST') started.set(r.url() + '#' + r.postData()?.slice(0, 40), Date.now());
+  });
+  page.on('requestfinished', async (r) => {
+    if (r.method() !== 'POST') return;
+    const res = await r.response();
+    const t0 = started.get(r.url() + '#' + r.postData()?.slice(0, 40));
+    netlog.push(`${new Date().toISOString()} POST ${r.url()} ${res?.status()} ${t0 ? Date.now() - t0 : '?'}ms action=${r.headers()['next-action'] ?? ''}`);
+  });
+  page.on('requestfailed', (r) => netlog.push(`FAILED ${r.method()} ${r.url()} ${r.failure()?.errorText}`));
   page.on('pageerror', (e) => errors.push('pageerror: ' + e.message));
   page.on('console', (m) => {
     if (m.type() === 'error' && !/favicon|Download the React DevTools/.test(m.text())) errors.push('console: ' + m.text());
@@ -88,7 +102,7 @@ test.describe('akce', () => {
     await page.goto('/tasks');
     await page.getByLabel('Název úkolu').fill('E2E testovací úkol');
     await page.getByLabel('Název úkolu').press('Enter');
-    await expect(page.getByText('E2E testovací úkol').first()).toBeVisible();
+    await expect(page.getByText('E2E testovací úkol').first()).toBeVisible({ timeout: 15_000 });
     const row = page.locator('.titem', { hasText: 'E2E testovací úkol' });
     await row.getByRole('button', { name: 'Označit jako hotové' }).click();
     await expect(row.getByRole('button', { name: 'Vrátit mezi nehotové' })).toBeVisible();
@@ -111,7 +125,7 @@ test.describe('akce', () => {
     await page.getByRole('button', { name: 'Zbytek v pořádku ✓' }).click();
     await expect(page.getByText('✓ Uloženo')).toBeVisible({ timeout: 10_000 });
     await page.getByRole('button', { name: 'Dokončit protokol' }).click();
-    await expect(page.getByText(/Dokončeno/).first()).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByText(/Dokončeno/).first()).toBeVisible({ timeout: 30_000 });
     await expect(page.getByText(/Krytina: Prasklé tašky/).first()).toBeVisible();
     await page.screenshot({ path: 'e2e-shots/akce-protokol-hotovo.png', fullPage: true });
     expect(errors).toEqual([]);

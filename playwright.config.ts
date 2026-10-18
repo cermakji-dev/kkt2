@@ -8,7 +8,7 @@ export default defineConfig({
   reporter: [['github'], ['list']],
   use: { baseURL: 'http://localhost:3000', locale: 'cs-CZ', timezoneId: 'Europe/Prague', colorScheme: 'dark' },
   webServer: {
-    command: 'npm run start',
+    command: 'mkdir -p e2e-shots && npm run start > e2e-shots/server.log 2>&1',
     url: 'http://localhost:3000/login',
     timeout: 120_000,
     reuseExistingServer: false,
