@@ -25,5 +25,8 @@ jobs:
           node-version: '22'
       # TODO: po commitnutí package-lock.json vrátit `npm ci` a `cache: npm`
       - run: npm install
-      - run: npx prisma db push
+      - run: |
+          npx prisma --version > /tmp/v.txt 2>&1 || true
+          echo "::error::VERSION $(tr '\n' ' ' < /tmp/v.txt | head -c 900)"
+          npx prisma db push > /tmp/o.txt 2>&1 || { echo "::error::PUSH $(tr '\n' ' ' < /tmp/o.txt | tail -c 1500)"; exit 1; }
       - run: npm run build
