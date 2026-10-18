@@ -106,7 +106,7 @@ export default async function TicketDetail({ params }: { params: Promise<{ id: s
                   <span className="avatar xs">{e.author ? initials(e.author) : '·'}</span>
                   <div>
                     <div className="tl-h">
-                      <b>{displayName(e.author)}</b>
+                      <b>{e.author ? displayName(e.author) : 'Systém'}</b>
                       <span className="muted small" title={fmtDateTime(e.createdAt)}>
                         {ago(e.createdAt)}
                       </span>
@@ -233,7 +233,7 @@ export default async function TicketDetail({ params }: { params: Promise<{ id: s
               )}
               {t.reporterEmail && <span className="muted small">{t.reporterEmail}</span>}
               <span className="muted small">
-                {CHANNEL[t.channel]} · zapsal {displayName(t.createdBy)}
+                {CHANNEL[t.channel]} · {t.createdBy ? `zapsal ${displayName(t.createdBy)}` : 'zapsáno do systému'}
               </span>
             </div>
           </section>

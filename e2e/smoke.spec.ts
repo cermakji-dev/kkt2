@@ -40,6 +40,11 @@ const PAGES: [string, string][] = [
   ['profil', '/profile'],
 ];
 
+async function go(page: Page, url: string) {
+  await page.goto(url);
+  await page.locator('html[data-hydrated]').waitFor({ state: 'attached', timeout: 15_000 });
+}
+
 const SIZES = [
   { name: 'desktop', width: 1680, height: 1000 },
   { name: 'mobil', width: 390, height: 844 },
@@ -136,7 +141,7 @@ test.describe('akce', () => {
 
   test('hlášení závady od zápisu po vyřešení', async ({ page }) => {
     const errors = watch(page);
-    await page.goto('/tickets/new');
+    await go(page, '/tickets/new');
     await page.getByLabel('Co se stalo *').fill('E2E kape kohoutek');
     await page.getByLabel('Dům *').selectOption('bd-lipova14');
     await page.getByRole('button', { name: 'Zapsat hlášení' }).click();
@@ -154,14 +159,14 @@ test.describe('akce', () => {
 
   test('rychlé přidání a odškrtnutí úkolu', async ({ page }) => {
     const errors = watch(page);
-    await page.goto('/tasks');
+    await go(page, '/tasks');
     await page.getByLabel('Název úkolu').fill('E2E testovací úkol');
     await page.getByLabel('Název úkolu').press('Enter');
     await expect(page.getByText('E2E testovací úkol').first()).toBeVisible({ timeout: 15_000 });
     const row = page.locator('.trow', { hasText: 'E2E testovací úkol' });
     await row.getByRole('button', { name: 'Označit jako hotové' }).click();
     await expect(row.getByRole('button', { name: 'Vrátit mezi nehotové' })).toBeVisible();
-    await page.goto('/tasks?s=team&t=t2');
+    await go(page, '/tasks?s=team&t=t2');
     await expect(page.getByRole('complementary', { name: 'Detail úkolu' })).toBeVisible();
     await page.getByPlaceholder('Napište komentář…').fill('Komentář z testu');
     await page.getByRole('button', { name: 'Komentovat' }).click();
@@ -171,7 +176,7 @@ test.describe('akce', () => {
 
   test('protokol kontroly od začátku do konce', async ({ page }) => {
     const errors = watch(page);
-    await page.goto('/inspections');
+    await go(page, '/inspections');
     await page.locator('.hero-start select[name="buildingId"]').selectOption('bd-zelena21');
     await page.getByRole('button', { name: 'Začít kontrolu' }).click();
     await page.waitForURL(/\/inspections\/reports\//);
@@ -188,7 +193,7 @@ test.describe('akce', () => {
 
   test('zapůjčení a vrácení klíčů s podpisem', async ({ page }) => {
     const errors = watch(page);
-    await page.goto('/keys/k4/lend');
+    await go(page, '/keys/k4/lend');
     await page.getByLabel('Jméno přebírajícího *').fill('Test Testovič');
     const pad = page.getByRole('img', { name: 'Podpis přebírajícího' }).or(page.locator('canvas.sigpad').first());
     const box = (await page.locator('canvas.sigpad').first().boundingBox())!;
@@ -208,10 +213,10 @@ test.describe('akce', () => {
 
   test('docházka a žádost o dovolenou', async ({ page }) => {
     const errors = watch(page);
-    await page.goto('/attendance');
+    await go(page, '/attendance');
     await page.getByRole('button', { name: 'Příchod' }).click();
     await expect(page.getByRole('heading', { name: 'V práci' })).toBeVisible();
-    await page.goto('/leave');
+    await go(page, '/leave');
     const from = new Date(Date.now() + 40 * 86_400_000).toISOString().slice(0, 10);
     await page.locator('input[name="from"]').fill(from);
     await page.getByRole('button', { name: 'Odeslat ke schválení' }).click();

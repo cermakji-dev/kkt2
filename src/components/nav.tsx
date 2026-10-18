@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 export type NavItem = { href: string; label: string; icon: keyof typeof ICONS; count?: number; hot?: boolean };
@@ -33,6 +34,10 @@ function useActive() {
 
 export default function Nav({ items }: { items: NavItem[] }) {
   const isActive = useActive();
+  // Značka pro E2E testy: aplikace je hydratovaná a server actions jsou připravené.
+  useEffect(() => {
+    document.documentElement.dataset.hydrated = '1';
+  }, []);
   return (
     <nav aria-label="Moduly" className="side-nav">
       {items.map((it) => (

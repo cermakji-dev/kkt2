@@ -81,6 +81,7 @@ export default async function Suppliers({ searchParams }: { searchParams: Promis
             </header>
           </section>
           {suppliers.length === 0 && <div className="panel empty">Žádná firma.</div>}
+          <div className="supsecs">
           {[...byCat.entries()].map(([cat, list]) => (
             <section key={cat} className="supsec">
               <h3 className="supcat">{SUPPLIER_CATEGORIES[cat] ?? cat}</h3>
@@ -117,6 +118,7 @@ export default async function Suppliers({ searchParams }: { searchParams: Promis
               </div>
             </section>
           ))}
+          </div>
         </>
       ) : (
         <div className="stack">

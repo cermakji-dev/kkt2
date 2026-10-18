@@ -80,7 +80,7 @@ export default async function Home() {
           <em className={overdue.length ? 'alert' : ''}>{overdue.length ? `${overdue.length} po termínu` : 'vše v termínu'}</em>
         </Link>
         <Link className={'stat' + (havarie.length ? ' hot' : '')} href="/tickets">
-          <span>Otevřené závady</span>
+          <span>{myBuildingIds.length ? 'Závady v mých domech' : 'Otevřené závady'}</span>
           <b>{tickets.length}</b>
           <em className={havarie.length ? 'alert' : ''}>{havarie.length ? `${havarie.length} havárie` : fresh ? `${fresh} nových` : where}</em>
         </Link>

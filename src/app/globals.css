@@ -469,7 +469,9 @@ form.commentform { padding: 0; background: transparent; border: 0; grid-template
   .tpanel-body { padding: 14px 16px calc(32px + env(safe-area-inset-bottom, 0px)); }
   .tbar { flex-direction: column; align-items: stretch; min-width: 0; }
   .tbar > * { min-width: 0; max-width: 100%; }
-  .tbar-b .mini { flex: 1; max-width: none; }
+  .tbar-b { flex-wrap: wrap; }
+  .tbar-b .mini { flex: 1 1 0; min-width: 0; max-width: none; }
+  .tbar-b input[type=search].mini { flex: 1 1 100%; }
   .quickadd .mini { flex: 1; }
   .viewtoggle { width: 100%; }
   .viewtoggle a { flex: 1; text-align: center; }
@@ -658,7 +660,7 @@ form.readform .err { font-size: 12px; }
 .xlist { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; margin-bottom: 14px; box-shadow: var(--shadow); container-type: inline-size; }
 .rows > .xrow, .xlist > .xrow { border-bottom: 1px solid var(--line); }
 .xrow:last-child { border-bottom: 0 !important; }
-.xrow, .xhead { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto auto; grid-template-areas: "no main st sla" ". main who sla"; column-gap: 10px; align-items: center; padding: 8px 14px; text-decoration: none; color: inherit; }
+.xrow, .xhead { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; grid-template-areas: "no main sla" ". st who"; column-gap: 10px; row-gap: 5px; align-items: center; padding: 9px 14px; text-decoration: none; color: inherit; }
 .xrow { transition: background .1s; }
 .xrow:hover { background: rgba(255, 255, 255, .025); }
 .xrow.hav { box-shadow: inset 3px 0 0 var(--bad); background: linear-gradient(90deg, rgba(255, 93, 108, .06), transparent 50%); }
@@ -669,14 +671,16 @@ form.readform .err { font-size: 12px; }
 .x-t .tt { font-size: 14px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .x-s { font-size: 12.5px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .x-bld { grid-area: bld; display: none; min-width: 0; }
-.x-st { grid-area: st; display: flex; flex-direction: column; align-items: start; gap: 2px; }
+.x-st { grid-area: st; display: flex; align-items: center; gap: 8px; min-width: 0; }
 .x-sup { font-size: 11.5px; color: var(--muted); max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.x-who { grid-area: who; justify-self: start; }
+.x-who { grid-area: who; justify-self: end; display: flex; align-items: center; }
 .x-sla { grid-area: sla; text-align: right; }
 .xhead { display: none; min-height: 34px; font-size: 11.5px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); background: rgba(255, 255, 255, .015); padding-block: 0; }
 @container (min-width: 820px) {
   .xrow, .xhead { grid-template-columns: 56px minmax(0, 1fr) 190px 150px 44px 110px; grid-template-areas: "no main bld st who sla"; }
   .x-bld { display: block; }
+  .x-st { flex-direction: column; align-items: start; gap: 2px; }
+  .x-who { justify-self: start; }
   .xhead { display: grid; }
   .x-sla { text-align: left; }
 }
@@ -701,9 +705,11 @@ form.readform .err { font-size: 12px; }
 form.commentform.pad { padding: 0 16px 16px; }
 
 /* dodavatelé */
-.supsec { margin-bottom: 18px; }
+.supsecs { columns: 320px; column-gap: 12px; }
+.supsec { break-inside: avoid; margin-bottom: 16px; }
 .supcat { margin: 0 0 8px; font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
-.supgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+.supgrid { display: grid; gap: 10px; }
+.tab-body > .supgrid, .stack > .supgrid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
 .supcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 14px 16px; display: grid; gap: 8px; box-shadow: var(--shadow); }
 .supcard.inactive { opacity: .55; }
 .sup-name { text-decoration: none; color: var(--fg); font-weight: 600; font-size: 15px; }
