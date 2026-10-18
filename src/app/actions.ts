@@ -6,6 +6,7 @@ import { Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { requireAdmin, requireUser } from '@/lib/auth';
 import { NEXT_STATUS } from '@/lib/format';
+import { defaultNextDue } from '@/lib/revisions';
 
 export type FormState = { error?: string; ok?: number };
 
@@ -186,7 +187,9 @@ export async function createInspection(_: FormState, fd: FormData): Promise<Form
   await requireUser();
   const p = inspectionSchema.safeParse(fields(fd));
   if (!p.success) return { error: 'Vyplňte druh kontroly, objekt a datum.' };
-  await prisma.inspection.create({ data: p.data });
+  // Bez ručně zadaného termínu se další termín dopočítá ze zákonného intervalu.
+  const nextDue = p.data.nextDue ?? defaultNextDue(p.data.type, p.data.inspectedAt);
+  await prisma.inspection.create({ data: { ...p.data, nextDue } });
   return done();
 }
 

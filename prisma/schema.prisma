@@ -60,6 +60,27 @@ model Building {
   keys         KeySet[]
   inspections  Inspection[]
   reports      InspectionReport[]
+  code           String?
+  ico            String?
+  svjName        String?
+  cadastralArea  String?
+  yearBuilt      Int?
+  floors         Int?
+  entrances      Int?
+  nonResidential Int?
+  garages        Int?
+  hasElevator    Boolean @default(false)
+  hasGas         Boolean @default(false)
+  hasBoiler      Boolean @default(false)
+  hasChimney     Boolean @default(false)
+  hasHydrants    Boolean @default(false)
+  heating        String?
+  contacts       BuildingContact[]
+  unitList       Unit[]
+  meters         Meter[]
+  documents      BuildingDocument[]
+  contracts      Contract[]
+  tickets        Ticket[]
 
   @@index([technicianId])
   @@index([referentId])

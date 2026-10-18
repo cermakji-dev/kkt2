@@ -82,3 +82,25 @@ export function latestPerType<T extends { buildingId: string; type: string; insp
 export function isOverdue(t: { status: string; dueAt: Date | null }): boolean {
   return t.status !== 'DONE' && !!t.dueAt && daysUntil(t.dueAt) < 0;
 }
+
+export function addMonths(d: Date, m: number): Date {
+  const r = new Date(d);
+  r.setUTCMonth(r.getUTCMonth() + m);
+  return r;
+}
+
+export function fmtDateTime(d: Date | null | undefined): string {
+  if (!d) return '';
+  return new Intl.DateTimeFormat('cs-CZ', { timeZone: 'Europe/Prague', day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(d);
+}
+
+/** „před 3 h“, „včera“, „před 5 dny“ */
+export function ago(d: Date): string {
+  const min = Math.round((Date.now() - d.getTime()) / 60000);
+  if (min < 1) return 'právě teď';
+  if (min < 60) return `před ${min} min`;
+  const h = Math.round(min / 60);
+  if (h < 24) return `před ${h} h`;
+  const dd = Math.round(h / 24);
+  return dd === 1 ? 'včera' : `před ${dd} dny`;
+}

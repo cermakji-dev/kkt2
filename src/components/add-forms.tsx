@@ -4,7 +4,8 @@ import { displayName } from '@/lib/auth';
 import { AddPanel } from './forms';
 import { BuildingSelect } from './ui';
 import { createBuilding, createInspection, createKey, createTask } from '@/app/actions';
-import { INSPECTION_TYPES, startOfToday, toInputDate } from '@/lib/format';
+import { startOfToday, toInputDate } from '@/lib/format';
+import { INSPECTION_TYPE_NAMES as INSPECTION_TYPES } from '@/lib/revisions';
 
 type B = Pick<Building, 'id' | 'name'>[];
 
@@ -103,7 +104,7 @@ export function AddInspection({ buildings, buildingId }: { buildings: B; buildin
       </label>
       <label>
         Další termín
-        <input name="nextDue" type="date" />
+        <input name="nextDue" type="date" title="Nevyplněno = podle zákonného intervalu" />
       </label>
       <label>
         Výsledek
