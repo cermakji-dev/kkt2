@@ -54,7 +54,9 @@ function watch(page: Page) {
     const t0 = started.get(r.url() + '#' + r.postData()?.slice(0, 40));
     let body = '';
     try {
-      body = (await res?.text())?.slice(0, 600).replace(/\n/g, '⏎') ?? '';
+      const full = (await res?.text()) ?? '';
+      body = full.slice(0, 300).replace(/\n/g, '⏎');
+      if (/leave|tasks|inspections\/reports/.test(r.url())) fs.appendFileSync('e2e-shots/action-bodies.log', `\n===== ${r.url()} (${full.length} B)\n${full.slice(-4000)}\n`);
     } catch {}
     netlog.push(`${new Date().toISOString()} POST ${r.url()} ${res?.status()} ${t0 ? Date.now() - t0 : '?'}ms action=${r.headers()['next-action'] ?? ''} ct=${res?.headers()['content-type']} body=${body}`);
   });
