@@ -1,0 +1,124 @@
+2026-10-18T23:53:11.015Z START RSC http://localhost:3000/?_rsc=Z7mRJna2pMy0j7dj prefetch=1
+2026-10-18T23:53:11.015Z START RSC http://localhost:3000/buildings?_rsc=Z7mRJna2pMy0j7dj prefetch=1
+2026-10-18T23:53:11.015Z START RSC http://localhost:3000/tickets?_rsc=Z7mRJna2pMy0j7dj prefetch=1
+2026-10-18T23:53:11.015Z START RSC http://localhost:3000/tasks?_rsc=Z7mRJna2pMy0j7dj prefetch=1
+2026-10-18T23:53:11.015Z START RSC http://localhost:3000/keys?_rsc=Z7mRJna2pMy0j7dj prefetch=1
+2026-10-18T23:53:11.025Z HEADERS RSC http://localhost:3000/?_rsc=Z7mRJna2pMy0j7dj 200
+2026-10-18T23:53:11.025Z HEADERS RSC http://localhost:3000/buildings?_rsc=Z7mRJna2pMy0j7dj 200
+2026-10-18T23:53:11.025Z HEADERS RSC http://localhost:3000/tickets?_rsc=Z7mRJna2pMy0j7dj 200
+2026-10-18T23:53:11.032Z HEADERS RSC http://localhost:3000/tasks?_rsc=Z7mRJna2pMy0j7dj 200
+2026-10-18T23:53:11.032Z HEADERS RSC http://localhost:3000/keys?_rsc=Z7mRJna2pMy0j7dj 200
+2026-10-18T23:53:11.033Z START RSC http://localhost:3000/suppliers?_rsc=Z7mRJna2pMy0j7dj prefetch=1
+2026-10-18T23:53:11.034Z START RSC http://localhost:3000/attendance?_rsc=Z7mRJna2pMy0j7dj prefetch=1
+2026-10-18T23:53:11.034Z START RSC http://localhost:3000/leave?_rsc=Z7mRJna2pMy0j7dj prefetch=1
+2026-10-18T23:53:11.034Z START RSC http://localhost:3000/users?_rsc=Z7mRJna2pMy0j7dj prefetch=1
+FAILED GET http://localhost:3000/?_rsc=Z7mRJna2pMy0j7dj net::ERR_ABORTED
+2026-10-18T23:53:11.038Z START RSC http://localhost:3000/profile?_rsc=Z7mRJna2pMy0j7dj prefetch=1
+FAILED GET http://localhost:3000/buildings?_rsc=Z7mRJna2pMy0j7dj net::ERR_ABORTED
+FAILED GET http://localhost:3000/tickets?_rsc=Z7mRJna2pMy0j7dj net::ERR_ABORTED
+FAILED GET http://localhost:3000/tasks?_rsc=Z7mRJna2pMy0j7dj net::ERR_ABORTED
+FAILED GET http://localhost:3000/keys?_rsc=Z7mRJna2pMy0j7dj net::ERR_ABORTED
+2026-10-18T23:53:11.038Z HEADERS RSC http://localhost:3000/suppliers?_rsc=Z7mRJna2pMy0j7dj 200
+2026-10-18T23:53:11.041Z HEADERS RSC http://localhost:3000/attendance?_rsc=Z7mRJna2pMy0j7dj 200
+2026-10-18T23:53:11.041Z HEADERS RSC http://localhost:3000/leave?_rsc=Z7mRJna2pMy0j7dj 200
+2026-10-18T23:53:11.046Z HEADERS RSC http://localhost:3000/users?_rsc=Z7mRJna2pMy0j7dj 200
+2026-10-18T23:53:11.050Z HEADERS RSC http://localhost:3000/profile?_rsc=Z7mRJna2pMy0j7dj 200
+2026-10-18T23:53:11.050Z START RSC http://localhost:3000/inspections/reports/rep-draft?_rsc=Z7mRJna2pMy0j7dj prefetch=1
+2026-10-18T23:53:11.050Z START RSC http://localhost:3000/inspections/reports/rep-final?_rsc=Z7mRJna2pMy0j7dj prefetch=1
+FAILED GET http://localhost:3000/suppliers?_rsc=Z7mRJna2pMy0j7dj net::ERR_ABORTED
+FAILED GET http://localhost:3000/attendance?_rsc=Z7mRJna2pMy0j7dj net::ERR_ABORTED
+FAILED GET http://localhost:3000/leave?_rsc=Z7mRJna2pMy0j7dj net::ERR_ABORTED
+FAILED GET http://localhost:3000/users?_rsc=Z7mRJna2pMy0j7dj net::ERR_ABORTED
+FAILED GET http://localhost:3000/profile?_rsc=Z7mRJna2pMy0j7dj net::ERR_ABORTED
+2026-10-18T23:53:11.057Z HEADERS RSC http://localhost:3000/inspections/reports/rep-draft?_rsc=Z7mRJna2pMy0j7dj 200
+2026-10-18T23:53:11.057Z HEADERS RSC http://localhost:3000/inspections/reports/rep-final?_rsc=Z7mRJna2pMy0j7dj 200
+FAILED GET http://localhost:3000/inspections/reports/rep-draft?_rsc=Z7mRJna2pMy0j7dj net::ERR_ABORTED
+FAILED GET http://localhost:3000/inspections/reports/rep-final?_rsc=Z7mRJna2pMy0j7dj net::ERR_ABORTED
+2026-10-18T23:53:11.143Z POST http://localhost:3000/inspections 303 32ms action=404eea0f888a43048f99c843826db732efa91c0078 ct=text/x-component body=
+2026-10-18T23:53:11.175Z START RSC http://localhost:3000/buildings/bd-zelena21?_rsc=eR9EMBYzXmELj4Uj prefetch=1
+2026-10-18T23:53:11.186Z HEADERS RSC http://localhost:3000/buildings/bd-zelena21?_rsc=eR9EMBYzXmELj4Uj 200
+FAILED GET http://localhost:3000/buildings/bd-zelena21?_rsc=eR9EMBYzXmELj4Uj net::ERR_ABORTED
+2026-10-18T23:53:11.990Z POST http://localhost:3000/inspections/reports/cmvehdwi4000d0cyi62ikdpk0 200 13ms action=605b3adb3a03054c1306da833035b379e0af69da23 ct=text/x-component body=0:{"a":"$@1","f":"","b":"a-9rj8_lC3mHOqIzMohlK"}⏎1:{"ok":true,"at":1792367591985}⏎
+2026-10-18T23:53:12.147Z POST http://localhost:3000/inspections/reports/cmvehdwi4000d0cyi62ikdpk0 200 23ms action=605b3adb3a03054c1306da833035b379e0af69da23 ct=text/x-component body=0:{"a":"$@1","f":"","b":"a-9rj8_lC3mHOqIzMohlK"}⏎1:{"ok":true,"at":1792367592131}⏎
+2026-10-18T23:53:12.158Z START RSC http://localhost:3000/inspections/reports/cmvehdwi4000d0cyi62ikdpk0?_rsc=97L4fQjSKc-fEME6 prefetch=
+2026-10-18T23:53:12.160Z POST http://localhost:3000/inspections/reports/cmvehdwi4000d0cyi62ikdpk0 200 20ms action=4039545983febb09ae778187194b888ea417eef8ec ct=text/x-component body=0:{"a":"$@1","f":"","b":"a-9rj8_lC3mHOqIzMohlK"}⏎1:{}⏎
+2026-10-18T23:53:12.162Z HEADERS RSC http://localhost:3000/inspections/reports/cmvehdwi4000d0cyi62ikdpk0?_rsc=97L4fQjSKc-fEME6 200
+2026-10-18T23:53:12.175Z DONE RSC http://localhost:3000/inspections/reports/cmvehdwi4000d0cyi62ikdpk0?_rsc=97L4fQjSKc-fEME6 17ms
+2026-10-18T23:53:12.525Z START RSC http://localhost:3000/?_rsc=1bN2-5_lM0X-luDJ prefetch=1
+2026-10-18T23:53:12.525Z START RSC http://localhost:3000/buildings?_rsc=1bN2-5_lM0X-luDJ prefetch=1
+2026-10-18T23:53:12.525Z START RSC http://localhost:3000/tickets?_rsc=1bN2-5_lM0X-luDJ prefetch=1
+2026-10-18T23:53:12.525Z START RSC http://localhost:3000/tasks?_rsc=1bN2-5_lM0X-luDJ prefetch=1
+2026-10-18T23:53:12.525Z START RSC http://localhost:3000/inspections?_rsc=1bN2-5_lM0X-luDJ prefetch=1
+2026-10-18T23:53:12.538Z HEADERS RSC http://localhost:3000/?_rsc=1bN2-5_lM0X-luDJ 200
+2026-10-18T23:53:12.541Z HEADERS RSC http://localhost:3000/buildings?_rsc=1bN2-5_lM0X-luDJ 200
+2026-10-18T23:53:12.545Z HEADERS RSC http://localhost:3000/tickets?_rsc=1bN2-5_lM0X-luDJ 200
+2026-10-18T23:53:12.549Z HEADERS RSC http://localhost:3000/tasks?_rsc=1bN2-5_lM0X-luDJ 200
+2026-10-18T23:53:12.549Z HEADERS RSC http://localhost:3000/inspections?_rsc=1bN2-5_lM0X-luDJ 200
+2026-10-18T23:53:12.549Z START RSC http://localhost:3000/keys?_rsc=1bN2-5_lM0X-luDJ prefetch=1
+2026-10-18T23:53:12.550Z DONE RSC http://localhost:3000/inspections?_rsc=1bN2-5_lM0X-luDJ 25ms
+2026-10-18T23:53:12.551Z START RSC http://localhost:3000/suppliers?_rsc=1bN2-5_lM0X-luDJ prefetch=1
+2026-10-18T23:53:12.551Z START RSC http://localhost:3000/attendance?_rsc=1bN2-5_lM0X-luDJ prefetch=1
+2026-10-18T23:53:12.551Z START RSC http://localhost:3000/leave?_rsc=1bN2-5_lM0X-luDJ prefetch=1
+2026-10-18T23:53:12.551Z DONE RSC http://localhost:3000/?_rsc=1bN2-5_lM0X-luDJ 26ms
+2026-10-18T23:53:12.551Z START RSC http://localhost:3000/users?_rsc=1bN2-5_lM0X-luDJ prefetch=1
+2026-10-18T23:53:12.551Z DONE RSC http://localhost:3000/buildings?_rsc=1bN2-5_lM0X-luDJ 26ms
+FAILED GET http://localhost:3000/tasks?_rsc=1bN2-5_lM0X-luDJ net::ERR_ABORTED
+2026-10-18T23:53:12.551Z DONE RSC http://localhost:3000/tickets?_rsc=1bN2-5_lM0X-luDJ 26ms
+2026-10-18T23:53:12.551Z HEADERS RSC http://localhost:3000/keys?_rsc=1bN2-5_lM0X-luDJ 200
+2026-10-18T23:53:12.560Z HEADERS RSC http://localhost:3000/suppliers?_rsc=1bN2-5_lM0X-luDJ 200
+2026-10-18T23:53:12.562Z HEADERS RSC http://localhost:3000/attendance?_rsc=1bN2-5_lM0X-luDJ 200
+2026-10-18T23:53:12.564Z HEADERS RSC http://localhost:3000/leave?_rsc=1bN2-5_lM0X-luDJ 200
+2026-10-18T23:53:12.568Z HEADERS RSC http://localhost:3000/users?_rsc=1bN2-5_lM0X-luDJ 200
+2026-10-18T23:53:12.579Z START RSC http://localhost:3000/profile?_rsc=1bN2-5_lM0X-luDJ prefetch=1
+2026-10-18T23:53:12.579Z START RSC http://localhost:3000/keys/k4?_rsc=1bN2-5_lM0X-luDJ prefetch=1
+FAILED GET http://localhost:3000/users?_rsc=1bN2-5_lM0X-luDJ net::ERR_ABORTED
+FAILED GET http://localhost:3000/keys?_rsc=1bN2-5_lM0X-luDJ net::ERR_ABORTED
+FAILED GET http://localhost:3000/suppliers?_rsc=1bN2-5_lM0X-luDJ net::ERR_ABORTED
+FAILED GET http://localhost:3000/attendance?_rsc=1bN2-5_lM0X-luDJ net::ERR_ABORTED
+FAILED GET http://localhost:3000/leave?_rsc=1bN2-5_lM0X-luDJ net::ERR_ABORTED
+2026-10-18T23:53:12.597Z HEADERS RSC http://localhost:3000/profile?_rsc=1bN2-5_lM0X-luDJ 200
+2026-10-18T23:53:12.604Z HEADERS RSC http://localhost:3000/keys/k4?_rsc=1bN2-5_lM0X-luDJ 200
+FAILED GET http://localhost:3000/keys/k4?_rsc=1bN2-5_lM0X-luDJ net::ERR_ABORTED
+FAILED GET http://localhost:3000/profile?_rsc=1bN2-5_lM0X-luDJ net::ERR_ABORTED
+2026-10-18T23:53:12.994Z POST http://localhost:3000/keys/k4/lend 303 36ms action=6059a68dda33c5b4d6aba7acc8db6c8a1dc5ad8272 ct=text/x-component body=
+2026-10-18T23:53:13.016Z START RSC http://localhost:3000/keys?_rsc=V_Ya3LtjWMN6O7Bf prefetch=1
+2026-10-18T23:53:13.016Z START RSC http://localhost:3000/buildings/bd-korunni88?_rsc=V_Ya3LtjWMN6O7Bf prefetch=1
+2026-10-18T23:53:13.022Z HEADERS RSC http://localhost:3000/keys?_rsc=V_Ya3LtjWMN6O7Bf 200
+2026-10-18T23:53:13.028Z HEADERS RSC http://localhost:3000/buildings/bd-korunni88?_rsc=V_Ya3LtjWMN6O7Bf 200
+FAILED GET http://localhost:3000/keys?_rsc=V_Ya3LtjWMN6O7Bf net::ERR_ABORTED
+FAILED GET http://localhost:3000/buildings/bd-korunni88?_rsc=V_Ya3LtjWMN6O7Bf net::ERR_ABORTED
+2026-10-18T23:53:13.082Z POST http://localhost:3000/keys/k4?nova=cmvehdxxh000j0cyir8li9gqv 200 26ms action=4030989e46e96964dede60c270efd115e1e37a39f0 ct=text/x-component body=2:"$Sreact.fragment"⏎4:I[9766,[],""]⏎5:I[8924,[],""]⏎7:I[4431,[],"OutletBoundary"]⏎9:I[5278,[],"AsyncMetadataOutlet"]⏎b:I[4431,[],"ViewportBoundary"]⏎d:I[4431,[],"MetadataBoundary"]⏎e:"$Sreact.suspense"⏎0:{"a":"$@1","f":[[["",{"children":["keys",{"children":[["id","k4","d"],{"children":["__PAGE__?{\
+2026-10-18T23:53:13.086Z START RSC http://localhost:3000/keys/k4/lend?_rsc=V_Ya3LtjWMN6O7Bf prefetch=1
+2026-10-18T23:53:13.089Z HEADERS RSC http://localhost:3000/keys/k4/lend?_rsc=V_Ya3LtjWMN6O7Bf 200
+2026-10-18T23:53:13.089Z DONE RSC http://localhost:3000/keys/k4/lend?_rsc=V_Ya3LtjWMN6O7Bf 3ms
+2026-10-18T23:53:13.268Z START RSC http://localhost:3000/?_rsc=WCs0Jg_hZLZc3XNz prefetch=1
+2026-10-18T23:53:13.268Z START RSC http://localhost:3000/buildings?_rsc=WCs0Jg_hZLZc3XNz prefetch=1
+2026-10-18T23:53:13.268Z START RSC http://localhost:3000/tickets?_rsc=WCs0Jg_hZLZc3XNz prefetch=1
+2026-10-18T23:53:13.268Z START RSC http://localhost:3000/tasks?_rsc=WCs0Jg_hZLZc3XNz prefetch=1
+2026-10-18T23:53:13.268Z START RSC http://localhost:3000/inspections?_rsc=WCs0Jg_hZLZc3XNz prefetch=1
+2026-10-18T23:53:13.278Z HEADERS RSC http://localhost:3000/?_rsc=WCs0Jg_hZLZc3XNz 200
+2026-10-18T23:53:13.278Z HEADERS RSC http://localhost:3000/buildings?_rsc=WCs0Jg_hZLZc3XNz 200
+2026-10-18T23:53:13.279Z HEADERS RSC http://localhost:3000/tickets?_rsc=WCs0Jg_hZLZc3XNz 200
+2026-10-18T23:53:13.283Z HEADERS RSC http://localhost:3000/tasks?_rsc=WCs0Jg_hZLZc3XNz 200
+2026-10-18T23:53:13.283Z HEADERS RSC http://localhost:3000/inspections?_rsc=WCs0Jg_hZLZc3XNz 200
+2026-10-18T23:53:13.285Z START RSC http://localhost:3000/keys?_rsc=WCs0Jg_hZLZc3XNz prefetch=1
+2026-10-18T23:53:13.285Z START RSC http://localhost:3000/suppliers?_rsc=WCs0Jg_hZLZc3XNz prefetch=1
+2026-10-18T23:53:13.285Z START RSC http://localhost:3000/leave?_rsc=WCs0Jg_hZLZc3XNz prefetch=1
+2026-10-18T23:53:13.285Z START RSC http://localhost:3000/users?_rsc=WCs0Jg_hZLZc3XNz prefetch=1
+2026-10-18T23:53:13.285Z START RSC http://localhost:3000/profile?_rsc=WCs0Jg_hZLZc3XNz prefetch=1
+FAILED GET http://localhost:3000/inspections?_rsc=WCs0Jg_hZLZc3XNz net::ERR_ABORTED
+FAILED GET http://localhost:3000/?_rsc=WCs0Jg_hZLZc3XNz net::ERR_ABORTED
+FAILED GET http://localhost:3000/buildings?_rsc=WCs0Jg_hZLZc3XNz net::ERR_ABORTED
+FAILED GET http://localhost:3000/tickets?_rsc=WCs0Jg_hZLZc3XNz net::ERR_ABORTED
+FAILED GET http://localhost:3000/tasks?_rsc=WCs0Jg_hZLZc3XNz net::ERR_ABORTED
+2026-10-18T23:53:13.289Z HEADERS RSC http://localhost:3000/keys?_rsc=WCs0Jg_hZLZc3XNz 200
+2026-10-18T23:53:13.296Z HEADERS RSC http://localhost:3000/suppliers?_rsc=WCs0Jg_hZLZc3XNz 200
+2026-10-18T23:53:13.297Z HEADERS RSC http://localhost:3000/leave?_rsc=WCs0Jg_hZLZc3XNz 200
+2026-10-18T23:53:13.299Z HEADERS RSC http://localhost:3000/users?_rsc=WCs0Jg_hZLZc3XNz 200
+2026-10-18T23:53:13.301Z HEADERS RSC http://localhost:3000/profile?_rsc=WCs0Jg_hZLZc3XNz 200
+FAILED GET http://localhost:3000/keys?_rsc=WCs0Jg_hZLZc3XNz net::ERR_ABORTED
+FAILED GET http://localhost:3000/suppliers?_rsc=WCs0Jg_hZLZc3XNz net::ERR_ABORTED
+FAILED GET http://localhost:3000/leave?_rsc=WCs0Jg_hZLZc3XNz net::ERR_ABORTED
+FAILED GET http://localhost:3000/users?_rsc=WCs0Jg_hZLZc3XNz net::ERR_ABORTED
+FAILED GET http://localhost:3000/profile?_rsc=WCs0Jg_hZLZc3XNz net::ERR_ABORTED
+2026-10-18T23:53:13.363Z POST http://localhost:3000/attendance 200 36ms action=408dffe45cd3b7f69c352858f95bf17a6b78df14ae ct=text/x-component body=2:"$Sreact.fragment"⏎4:I[9766,[],""]⏎5:I[8924,[],""]⏎7:I[4431,[],"OutletBoundary"]⏎9:I[5278,[],"AsyncMetadataOutlet"]⏎b:I[4431,[],"ViewportBoundary"]⏎d:I[4431,[],"MetadataBoundary"]⏎e:"$Sreact.suspense"⏎0:{"a":"$@1","f":[[["",{"children":["attendance",{"children":["__PAGE__",{}]}]},"$undefined","$un
