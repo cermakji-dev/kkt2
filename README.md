@@ -4,11 +4,24 @@ Vývojový základ samostatné aplikace pro správu bytových domů. Next.js, Ty
 
 ## Spuštění lokálně
 
-Požadavky: Node.js 22+, Docker Desktop.
+Požadavky: Node.js 22+.
+
+### S databází v Supabase (projekt `kkt2`)
+
+Tabulky v Supabase už existují a mají zapnuté RLS (veřejné Data API je zablokované, aplikace přistupuje přes Prismu).
 
 ```bash
 cp .env.example .env
+# v .env doplňte připojovací řetězce ze Supabase: Connect -> ORMs -> Prisma
 npm install
+npm run dev
+```
+
+### S lokální databází v Dockeru
+
+Požadavky navíc: Docker Desktop. V `.env` použijte zakomentované lokální řetězce.
+
+```bash
 docker compose up -d
 npx prisma db push
 npm run dev
